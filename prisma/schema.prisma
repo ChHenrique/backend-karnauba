@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model City {
+  id          String   @id @unique
+  name        String
+  state       String
+  description String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+
+  places      Place[]
+  events      Event[]
+}
+
+model Category {
+  id        String   @id @unique
+  name      String
+  icon      String?
+  createdAt DateTime @default(now())
+
+  places    Place[]
+}
+
+model Place {
+  id          String   @id @unique
+  name        String
+  description String
+  imageUrl    String
+  address     String
+  latitude    Float?
+  longitude   Float?
+  phone       String?
+  website     String?
+  createdAt   DateTime @default(now())
+
+  cityId      String
+  city        City      @relation(fields: [cityId], references: [id])
+
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id])
+}
+
+model Event {
+  id          String   @id @unique
+  name        String
+  description String
+  imageUrl    String
+  date        DateTime
+  location    String
+
+  cityId      String
+  city        City     @relation(fields: [cityId], references: [id])
+
+  createdAt   DateTime @default(now())
+}
+
+model Image {
+  id         String   @id @default(uuid())
+  url        String
+  modelId    String
+  modelType  String
+  createdAt  DateTime @default(now())
+
+  @@index([modelId, modelType])
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
