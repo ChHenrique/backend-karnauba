@@ -1,4 +1,5 @@
 import { prisma } from "../../../config/prisma";
+import { categoryDTO } from "../dtos/categoryDTO";
 import { Category } from "../entities/Category";
 import { CategoryRepository } from "./CategoryRepository";
 
@@ -29,12 +30,12 @@ export class CategoryPrismaRepository implements CategoryRepository {
         return data;
     }
 
-    async update(category: Category): Promise<Category> {
+    async update(id: string, data: Partial<Category>): Promise<Category> {
         const updatedCategory = await prisma.category.update({
-            where: { id: category.id },
+            where: { id: id },
             data: {
-                name: category.name,
-                icon: category.icon
+                name: data.name,
+                icon: data.icon
             }
         });
 

@@ -1,8 +1,8 @@
 import { ServerError } from "../../../shared/errors/serverError";
 import { cityDTO } from "../dtos/CityDTO";
 import { City } from "../entities/city";
+import { CityRepository } from "../repositories/CityRepository";
 
-import { CityRepository } from "../repositories/cityRepository";
 export class CityUpdateUseCase {
     constructor(
         private cityRepository: CityRepository

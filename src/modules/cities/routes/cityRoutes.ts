@@ -1,5 +1,5 @@
-import { cityInstance } from "../cities/repositories/cityInstances";
-import { verifyJWT } from "../../shared/middlewares/authMiddleware";
+import { cityInstance } from "../repositories/cityInstances";
+import { verifyJWT } from "../../../shared/middlewares/authMiddleware";
 import { FastifyInstance } from "fastify";
 
 

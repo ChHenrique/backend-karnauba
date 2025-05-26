@@ -1,7 +1,8 @@
 import { prisma } from "../../../config/prisma"
 import { City } from "../entities/city"
+import { CityRepository } from "./CityRepository"
 
-export class CityPrismaRepository implements CityPrismaRepository {
+export class CityPrismaRepository implements CityRepository {
     async findAll(): Promise<City[] | null> {
         const cities = await prisma.city.findMany({})
 
