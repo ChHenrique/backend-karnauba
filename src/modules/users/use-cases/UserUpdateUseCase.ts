@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { ServerError } from "../../../shared/errors/serverError";
 import { userDTO } from "../dtos/userDTO";
 import { userSchema } from "../schemas/userSchema";
-import { UserRepository } from "../UserRepository";
+import { UserRepository } from "../repositories/UserRepository";
 
 export class UserUpdateUseCase {
     constructor(private userRepository: UserRepository){}

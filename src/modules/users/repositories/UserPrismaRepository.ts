@@ -1,10 +1,10 @@
-import { prisma } from "../../config/prisma";
-import { User } from "./User";
-import { UserRepository } from "./UserRepository";
+import { prisma } from "../../../config/prisma";
+import { User } from "../entities/User";
+import { UserRepository } from "../repositories/UserRepository";
 
 
 export class UserPrismaRepository implements UserRepository {
-    async findAll(): Promise<User[]> {
+    async findAll(): Promise<User[] | null> {
         const users = await prisma.user.findMany({})
 
         return users

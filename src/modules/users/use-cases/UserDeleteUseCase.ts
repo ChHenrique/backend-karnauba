@@ -1,5 +1,5 @@
 import { ServerError } from "../../../shared/errors/serverError";
-import { UserRepository } from "../UserRepository";
+import { UserRepository } from "../repositories/UserRepository";
 
 export class UserDeleteUseCase{
     constructor(

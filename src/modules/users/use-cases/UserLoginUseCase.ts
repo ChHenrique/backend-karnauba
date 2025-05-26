@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { ServerError } from "../../../shared/errors/serverError";
 import { loginUserDTO } from "../dtos/userDTO";
 import { loginUserSchema } from "../schemas/userSchema";
-import { UserRepository } from "../UserRepository";
+import { UserRepository } from "../repositories/UserRepository";
 
 export class UserLoginUseCase {
   constructor(private userRepository: UserRepository) {}

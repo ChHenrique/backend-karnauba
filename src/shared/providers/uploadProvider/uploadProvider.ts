@@ -1,11 +1,11 @@
 import { Readable } from "stream";
 
-export interface IUploadProvider {
+export interface UploadProvider {
   upload(file: {
     filename: string;
     mimetype: string;
     stream: Readable;
-  }, folder: string): Promise<string>;
+  }, folder?: string): Promise<string>;
 
-  delete(file: string, folder: string): Promise<void>;
+  delete(file: string, folder?: string): Promise<void>;
 }

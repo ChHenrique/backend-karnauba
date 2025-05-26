@@ -1,10 +1,10 @@
-import { UserRepository } from "../UserRepository";
+import { UserRepository } from "../repositories/UserRepository";
 import { userDTO } from "../dtos/userDTO";
 import { userSchema } from "../schemas/userSchema";
 import { ServerError } from "../../../shared/errors/serverError";
 import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
-import { User } from "../User";
+import { User } from "../entities/User";
 
 export class UserCreateUseCase{
     constructor(private userRepository: UserRepository){}
