@@ -20,8 +20,9 @@ export class UserCreateUseCase{
 
         const id = randomUUID()
         const hashedPassword = await bcrypt.hash(password, 8)
+        
 
-        const user = new User(id, name, hashedPassword, email)
+        const user = new User(id, name, hashedPassword, email, "USER")
         this.userRepository.create(user)
 
         return user

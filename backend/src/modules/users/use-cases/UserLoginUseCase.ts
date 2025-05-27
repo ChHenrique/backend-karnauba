@@ -15,6 +15,9 @@ export class UserLoginUseCase {
     const { email, password } = parsed.data;
     const user = await this.userRepository.findByEmail(email);
     if (!user) throw new ServerError("Invalid credentials", 401);
+    
+    const isUserAdmin = user.role === "ADMIN"
+    if (!isUserAdmin) throw new ServerError('User is not admin', 401)
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) throw new ServerError("Invalid credentials", 401);

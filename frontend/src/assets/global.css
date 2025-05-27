@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+body {
+    margin: 0;
+    font-family: var(--font-spline-400); /* Exemplo de fonte padrão */
+    width: 100vw;
+}
+
+@theme {
+
+    --color-primary-100: #75F37C;
+    --color-primary-200: #E8C9FF;
+    --color-primary-300:#FF5454;
+
+
+    --color-neutrals-100:#FFFFFF;
+    --color-neutrals-200: #262626;
+
+    --font-roboto-700: 'Roboto Slab', serif;
+    --font-roboto-500: 'Roboto Slab', serif;
+    --font-roboto-400: 'Roboto Slab', serif;
+    --font-roboto-100: 'Roboto Slab', serif;
+
+    --font-spline-700: 'Spline Sans', sans-serif;
+    --font-spline-500: 'Spline Sans', sans-serif;
+    --font-spline-400: 'Spline Sans', sans-serif;
+
+}
+
+/* Roboto Slab */
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('/fonts/RobotoSlab-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('/fonts/RobotoSlab-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('/fonts/RobotoSlab-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('/fonts/RobotoSlab-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* Spline Sans */
+@font-face {
+  font-family: 'Spline Sans';
+  src: url('/fonts/SplineSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Spline Sans';
+  src: url('/fonts/SplineSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Spline Sans';
+  src: url('/fonts/SplineSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
