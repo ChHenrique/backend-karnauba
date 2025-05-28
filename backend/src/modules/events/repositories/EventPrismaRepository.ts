@@ -24,23 +24,23 @@ export class EventPrismaRepository implements EventRepository {
         return event;
     }
 
-    async create(data: Event): Promise<Event> {
-        const event = await prisma.event.create({
-            data: {
-                name: data.name,
-                description: data.description,
-                imageUrl: data.imageUrl ?? '',
-                location: data.location,
-                cityId: data.cityId,
-                id: data.id,
-                startDate: data.startDate,
-                endDate: data.endDate,
-            
-            }
-        });
+async create(data: Event): Promise<Event> {
+    const event = await prisma.event.create({
+        data: {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            imageUrl: data.imageUrl ?? '',
+            location: data.location,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            city: { connect: { id: data.cityId } },
+        },
+    });
 
-        return event;
-    }
+    return event;
+}
+
 
     async update(id: string, data: Partial<Event>): Promise<Event | null> {
         const event = await prisma.event.update({

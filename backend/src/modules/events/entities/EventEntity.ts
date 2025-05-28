@@ -7,7 +7,7 @@ export class Event {
         public location: string,
         public startDate: Date,
         public endDate: Date,
-        public readonly cityId: string,
+        public  cityId: string,
 
     ){}
 }

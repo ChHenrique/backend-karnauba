@@ -1,3 +1,5 @@
+import { Category } from "@prisma/client";
+
 export class Place {
     constructor(
         public readonly id: string,
@@ -7,6 +9,11 @@ export class Place {
         public address: string,
         public latitude: number,
         public longitude: number,
-        pulblic 
+        public color01: string,
+        public color02: string,
+        public category: Category,
+        public instagram: string,
+        public whatsapp: string,
+        public cityId: string,
     ){}
 }

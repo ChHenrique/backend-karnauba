@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                        // Versão moderna do JavaScript
+    "module": "CommonJS",                      // Compatível com Node.js
+    "lib": ["ES2020"],                         // Permite usar recursos modernos
+    "moduleResolution": "node",                // Resolve módulos no estilo Node
+    "esModuleInterop": true,                   // Suporte a importações CommonJS/ESM
+    "forceConsistentCasingInFileNames": true,  // Evita bugs por diferença de maiúsculas/minúsculas
+    "strict": true,                            // Ativa checagem de tipo rigorosa
+    "skipLibCheck": true,                      // Ignora checagem de tipos em node_modules
+    "types": ["node"],                         // Adiciona suporte a módulos nativos como 'crypto'
+    "resolveJsonModule": true                  // Permite importar arquivos .json
+  },
+  "include": ["src"],                          // Diretório do código-fonte
+  "exclude": ["node_modules", "dist"]          // Ignora essas pastas na compilação
+}
