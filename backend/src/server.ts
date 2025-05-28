@@ -6,12 +6,14 @@ import { UserRoutes } from "./modules/users/routes/userRoutes";
 import dotenv from "dotenv";
 import fastifyStatic from '@fastify/static';
 import path from 'path';
-import { CategoryRoutes } from "./modules/categories/routes/categoryRoutes";
+
 import { CityRoutes } from "./modules/cities/routes/cityRoutes";
+import { EventRoutes } from "./modules/events/routes/eventRoutes";
 
 
 
 const fastify = Fastify();
+fastify.register(cookie)
 fastify.register(multipart)
 
 fastify.register(fastifyStatic, {
@@ -23,12 +25,13 @@ dotenv.config();
 fastify.register(cors, {
   origin: true,
 });
-fastify.register(cookie)
+
 
 
 new UserRoutes(fastify).registerRoutes();
 new CityRoutes(fastify).registerRoutes();
-new CategoryRoutes(fastify).registerRoutes();
+new EventRoutes(fastify).registerRoutes();
+
 
 
 fastify.listen({ port: 3000 })

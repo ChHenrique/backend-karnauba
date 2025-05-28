@@ -1,11 +1,10 @@
-
 import { ServerError } from "../../../shared/errors/serverError";
 import { City } from "../entities/city";
-import { CityRepository } from "../repositories/cityRepository";
+import { CityRepository } from "../repositories/CityRepository";
 
 export class CityFindUniqueUseCase {
     constructor(
-        private cityRepository: CityRepository 
+        private cityRepository: CityRepository
     ) {}
 
     async execute(id: string): Promise<City> {

@@ -16,8 +16,6 @@ export class UserLoginUseCase {
     const user = await this.userRepository.findByEmail(email);
     if (!user) throw new ServerError("Invalid credentials", 401);
     
-    const isUserAdmin = user.role === "ADMIN"
-    if (!isUserAdmin) throw new ServerError('User is not admin', 401)
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) throw new ServerError("Invalid credentials", 401);
@@ -25,7 +23,7 @@ export class UserLoginUseCase {
     const secret = process.env.JWT_SECRET;
     if (!secret) throw new ServerError("Internal Server Error", 500);
 
-    const token = jwt.sign({ id: user.id }, secret, {});
+    const token = jwt.sign({ id: user.id, role: user.role }, secret, {});
 
     return token
   }

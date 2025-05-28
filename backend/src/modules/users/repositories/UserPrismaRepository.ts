@@ -4,8 +4,8 @@ import { UserRepository } from "../repositories/UserRepository";
 
 
 export class UserPrismaRepository implements UserRepository {
-    async findAll(): Promise<User[] | null> {
-        const users = await prisma.user.findMany({})
+    async findAll(): Promise<User[]> {
+        const users = await prisma.user.findMany()
 
         return users
     }

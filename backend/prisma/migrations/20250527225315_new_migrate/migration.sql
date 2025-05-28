@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 
+-- CreateEnum
+CREATE TYPE "Category" AS ENUM ('RESTAURANTE');
+
 -- CreateTable
 CREATE TABLE "City" (
     "id" TEXT NOT NULL,
@@ -9,18 +12,9 @@ CREATE TABLE "City" (
     "description" TEXT,
     "imageUrl" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "adminId" TEXT NOT NULL,
 
     CONSTRAINT "City_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Category" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "icon" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -35,8 +29,8 @@ CREATE TABLE "Place" (
     "phone" TEXT,
     "website" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "category" "Category" NOT NULL,
     "cityId" TEXT NOT NULL,
-    "categoryId" TEXT NOT NULL,
 
     CONSTRAINT "Place_pkey" PRIMARY KEY ("id")
 );
@@ -79,10 +73,7 @@ CREATE TABLE "User" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "City_id_key" ON "City"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Category_id_key" ON "Category"("id");
+CREATE UNIQUE INDEX "City_adminId_key" ON "City"("adminId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Place_id_key" ON "Place"("id");
@@ -97,10 +88,10 @@ CREATE INDEX "Image_modelId_modelType_idx" ON "Image"("modelId", "modelType");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
-ALTER TABLE "Place" ADD CONSTRAINT "Place_cityId_fkey" FOREIGN KEY ("cityId") REFERENCES "City"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "City" ADD CONSTRAINT "City_adminId_fkey" FOREIGN KEY ("adminId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Place" ADD CONSTRAINT "Place_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Place" ADD CONSTRAINT "Place_cityId_fkey" FOREIGN KEY ("cityId") REFERENCES "City"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_cityId_fkey" FOREIGN KEY ("cityId") REFERENCES "City"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

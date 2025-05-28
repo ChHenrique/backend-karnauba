@@ -31,8 +31,11 @@ model Place {
   address     String
   latitude    Float?
   longitude   Float?
-  phone       String?
-  website     String?
+  color01     String?
+  color02     String?
+  instagram   String?
+  whatsapp     String?
+
   createdAt   DateTime @default(now())
   category    Category
 
@@ -46,7 +49,8 @@ model Event {
   name        String
   description String
   imageUrl    String
-  date        DateTime
+  startDate   DateTime
+  endDate     DateTime
   location    String
 
   cityId      String
@@ -54,6 +58,7 @@ model Event {
 
   createdAt   DateTime @default(now())
 }
+
 
 model Image {
   id         String   @id 

@@ -1,6 +1,6 @@
 import { ServerError } from "../../../shared/errors/serverError";
 import { City } from "../entities/city";
-import { CityRepository } from "../repositories/cityRepository";
+import { CityRepository } from "../repositories/CityRepository";
 
 export class CityFindAllUseCase {
     constructor(private  cityRepository: CityRepository) {}

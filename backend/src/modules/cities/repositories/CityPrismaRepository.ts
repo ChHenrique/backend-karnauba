@@ -24,6 +24,7 @@ export class CityPrismaRepository implements CityRepository {
                 state: city.state,
                 description: city.description,
                 imageUrl: city.imageUrl ?? '',
+                adminId: city.adminId,
                 id: city.id
             }
         })

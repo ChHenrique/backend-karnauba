@@ -15,7 +15,7 @@ export class CityUpdateUseCase {
   
         const updatedCity = await this.cityRepository.update(id, data);
 
-        if (!updatedCity) throw new ServerError("Failed to update city", 500);
+        if (!updatedCity) throw new ServerError("Failed to update city")
 
         return updatedCity;
     }

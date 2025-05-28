@@ -1,6 +1,5 @@
 import { ServerError } from "../../../shared/errors/serverError";
-import { CityRepository } from "../repositories/cityRepository";
-
+import { CityRepository } from "../repositories/CityRepository";
 
 export class CityDeleteUseCase {
     constructor(
