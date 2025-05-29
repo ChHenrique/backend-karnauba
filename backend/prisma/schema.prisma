@@ -13,6 +13,8 @@ model City {
   state       String
   description String?
   imageUrl    String?
+  color01     String?
+  color02     String?
   createdAt   DateTime @default(now())
   
   admin       User     @relation("adminCity",fields: [adminId], references: [id])
@@ -31,8 +33,6 @@ model Place {
   address     String
   latitude    Float?
   longitude   Float?
-  color01     String?
-  color02     String?
   instagram   String?
   whatsapp     String?
 
@@ -88,6 +88,8 @@ enum Role {
 }
 
 enum Category {
-  RESTAURANTE
+  GASTRONOMIA
+  HOTEL
+  PAISAGENS
 }
 

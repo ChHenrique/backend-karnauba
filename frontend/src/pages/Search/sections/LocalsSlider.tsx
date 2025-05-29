@@ -5,7 +5,16 @@ import { Card } from "../../../components/Card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
-export function TuristicPoints() {
+type PlaceDefinition = {
+  name: string,
+  places: [{
+    name: string,
+    city: string,
+    imageUrl: string,
+  },],
+}
+
+export function LocalsSlider({name, places}: PlaceDefinition) {
   const pontosTuristicos = [
     {
       name: "praia do futuro",
@@ -66,7 +75,7 @@ export function TuristicPoints() {
   return (
     <div className="w-full h-fit flex mt-10 items-center flex-col justify-center bg-neutrals-100">
       <h1 className="w-full max-w-6xl mb-12 text-start text-2xl font-roboto-100 font-bold text-neutrals-200">
-        Pontos Turísticos em Alta
+        {name}
       </h1>
       <div className="w-full h-fit flex justify-center items-center">
         <div className="w-full max-w-6xl">
@@ -74,18 +83,18 @@ export function TuristicPoints() {
             slidesPerView={5}
             spaceBetween={100}
             modules={[Autoplay, Navigation]}
-                                   breakpoints={{
+            breakpoints={{
               0: {
-                slidesPerView: 2.5,
+                slidesPerView: 2,
               },
               600: {
-                slidesPerView:3.5,
+                slidesPerView:3,
               },
               720: {
-                slidesPerView: 3.5,
+                slidesPerView: 3,
               },
               860: {
-                slidesPerView: 3.5,
+                slidesPerView: 3,
               },
               1024: {
                 slidesPerView: 4,

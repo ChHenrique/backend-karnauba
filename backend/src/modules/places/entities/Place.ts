@@ -9,8 +9,6 @@ export class Place {
         public address: string,
         public latitude: number | null,
         public longitude: number | null,
-        public color01: string | null,
-        public color02: string | null,
         public category: Category,
         public instagram: string | null,
         public whatsapp: string | null,

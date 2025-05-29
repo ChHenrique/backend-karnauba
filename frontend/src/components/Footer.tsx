@@ -10,7 +10,7 @@ export function Footer(){
 
 
     return(
-        <div className="w-screen bg-neutrals-200 h-40 mt-30 flex  flex-col justify-end items-center">
+        <div className="w-screen bg-neutrals-200 h-40 mt-30 flex pb-2  flex-col justify-end items-center">
             <div className=' flex justify-center gap-6   items-center h-fit  w-1/6 mb-6'>
             <img src={Insta} alt="" className='h-6 aspect-square'/>
             <img src={Whats} alt="" className='h-6 aspect-square' />

@@ -42,7 +42,7 @@ export function Card({
       onMouseLeave={handleMouseLeave}
       className="h-50 max-md:h-36 w-50 max-md:w-36 aspect-square flex justify-end items-end bg-primary-200 rounded-2xl">
         <div
-          className="h-48 max-md:h-32 w-48 max-md:w-32 rounded-2xl absolute right-0 top-0"
+          className="h-48 max-md:h-34 w-48 max-md:w-34 rounded-2xl absolute right-0 top-0"
         style={{background: `url(${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}
         >
           <div className="h-full z-10 hover:bg-gray-100/15 absolute duration-200  w-full "></div>

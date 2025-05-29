@@ -5,5 +5,7 @@ export const CitySchema = z.object({
     state: z.string().min(1, "State is required"),
     description: z.string().optional(),
     imageUrl: z.string().optional(),
+    color01: z.string().optional(),
+    color02: z.string().optional(),
     adminId: z.string().min(1, "Admin ID is required")
 });

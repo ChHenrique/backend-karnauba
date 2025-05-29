@@ -31,16 +31,16 @@ export function Restaurants() {
             modules={[Autoplay, Navigation]}
                         breakpoints={{
               0: {
-                slidesPerView: 2,
+                slidesPerView: 2.5,
               },
               600: {
-                slidesPerView:3,
+                slidesPerView:3.5,
               },
               720: {
-                slidesPerView: 3,
+                slidesPerView: 3.5,
               },
               860: {
-                slidesPerView: 3,
+                slidesPerView: 3.5,
               },
               1024: {
                 slidesPerView: 4,

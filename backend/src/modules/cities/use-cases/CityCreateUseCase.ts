@@ -1,9 +1,10 @@
 import { cityDTO } from "../dtos/CityDTO"
 import { CitySchema } from "../schemas/citySchema"
-import { City } from "../entities/city"
+
 import { ServerError } from "../../../shared/errors/serverError"
 import { randomUUID } from "crypto"
 import { CityRepository } from "../repositories/CityRepository"
+import { City } from "../entities/city"
 
 export class CityCreateUseCase {
     constructor(
@@ -17,7 +18,7 @@ export class CityCreateUseCase {
         }
 
         const id = randomUUID()
-        const { name, state, description, imageUrl, adminId } = parsedData.data
+        const { name, state, description, imageUrl, adminId, color01, color02 } = parsedData.data
 
         const city = new City(
             id,
@@ -25,6 +26,8 @@ export class CityCreateUseCase {
             state,
             description ?? null,
             imageUrl ?? null,
+            color01 ?? null,
+            color02 ?? null,
             adminId
         )
 

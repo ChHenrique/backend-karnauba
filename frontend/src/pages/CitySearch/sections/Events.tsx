@@ -26,18 +26,18 @@ export function Events() {
         <div className="w-full max-w-6xl">
           <Swiper
             slidesPerView={5}
- breakpoints={{
+                        breakpoints={{
               0: {
-                slidesPerView: 2,
+                slidesPerView: 2.5,
               },
               600: {
-                slidesPerView:3,
+                slidesPerView:3.5,
               },
               720: {
-                slidesPerView: 3,
+                slidesPerView: 3.5,
               },
               860: {
-                slidesPerView: 3,
+                slidesPerView: 3.5,
               },
               1024: {
                 slidesPerView: 4,

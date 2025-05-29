@@ -4,14 +4,23 @@ import { CityRepository } from "./CityRepository"
 
 export class CityPrismaRepository implements CityRepository {
     async findAll(): Promise<City[] | null> {
-        const cities = await prisma.city.findMany({})
+        const cities = await prisma.city.findMany({
+            include: { 
+                places: true,
+                events: true
+            }
+        })
 
         return cities
     }
 
     async findUnique(id: string): Promise<City | null> {
         const city = await prisma.city.findUnique({
-            where: { id: id }
+            where: { id: id },
+            include: { 
+                places: true,
+                events: true
+            }
         })
 
         return city

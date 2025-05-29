@@ -23,8 +23,6 @@ export class PlaceCreateUseCase {
       imageUrl,
       latitude,
       longitude,
-      color01,
-      color02,
       instagram,
       whatsapp,
     } = parsedData.data!;
@@ -40,8 +38,6 @@ export class PlaceCreateUseCase {
       address,
       latitude ?? 0,
       longitude ?? 0,
-      color01 ?? "",
-      color02 ?? "",
       categoryEnum,
       instagram ?? "",
       whatsapp ?? "",
