@@ -2,7 +2,7 @@ import { CitySchema } from "../schemas/citySchema";
 import { ServerError } from "../../../shared/errors/serverError";
 import { randomUUID } from "crypto";
 import { CityRepository } from "../repositories/CityRepository";
-import { City } from "../entities/city";
+import { City } from "../entities/City";
 import { cityDTO } from "../dtos/cityDTO";
 
 import { parseImageInput } from "../../../shared/utils/parseImageInput";

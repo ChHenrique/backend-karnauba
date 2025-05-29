@@ -42,7 +42,12 @@ export class PlaceControllers {
     }
 
     async findAll(req: FastifyRequest, reply: FastifyReply) {
-        const places = await this.findAllUseCase.execute();
+        const { limit } = req.query as { limit?: string };
+
+        const parsedLimit = limit ? Number(limit) : undefined;
+
+        const places = await this.findAllUseCase.execute(parsedLimit);
+
         reply.send(places);
     }
 }

@@ -1,14 +1,16 @@
 import { ServerError } from "../../../shared/errors/serverError";
-import { City } from "../entities/city";
+import { City } from "../entities/City";
 import { CityRepository } from "../repositories/CityRepository";
 
 export class CityFindAllUseCase {
-    constructor(private  cityRepository: CityRepository) {}
+    constructor(private cityRepository: CityRepository) {}
 
-    async execute(): Promise<City[]> {
-        const cities = await this.cityRepository.findAll();
+    async execute(limit?: number): Promise<City[]> {
+        const cities = await this.cityRepository.findAll(limit);
 
-        if (!cities) throw new ServerError("Cities not found", 404);
+        if (!cities || cities.length === 0) {
+            throw new ServerError("Cities not found", 404);
+        }
 
         return cities;
     }

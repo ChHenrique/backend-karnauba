@@ -3,8 +3,9 @@ import { Event } from "../entities/EventEntity";
 import { EventRepository } from "./EventRepository";
 
 export class EventPrismaRepository implements EventRepository {
-    async findAll(): Promise<Event[]> {
+    async findAll(limit?: number): Promise<Event[]> {
         const events = await prisma.event.findMany({
+            take: limit,
             include: {
                 city: true
             }
@@ -34,6 +35,8 @@ async create(data: Event): Promise<Event> {
             location: data.location,
             startDate: data.startDate,
             endDate: data.endDate,
+            startTime: data.startTime,
+            endTime: data.endTime,
             city: { connect: { id: data.cityId } },
         },
     });
@@ -51,6 +54,8 @@ async create(data: Event): Promise<Event> {
                 imageUrl: data.imageUrl,
                 location: data.location,
                 startDate: data.startDate,
+                startTime: data.startTime,
+                endTime: data.endTime,
                 endDate: data.endDate,
             }
         });

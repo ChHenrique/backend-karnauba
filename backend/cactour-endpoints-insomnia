@@ -1,0 +1,693 @@
+type: collection.insomnia.rest/5.0
+name: cactour-endpoints
+meta:
+  id: wrk_8c6d25975ee74687921efb6caf0f9a26
+  created: 1748181438041
+  modified: 1748181438041
+collection:
+  - name: Users
+    meta:
+      id: fld_090a5081deac438cb01895c55983e9da
+      created: 1748185096428
+      modified: 1748185096428
+      sortKey: -1748185096428
+    children:
+      - url: localhost:3000/users
+        name: Create
+        meta:
+          id: req_cc36ffc9a6f440a588e275f5dc8a2d2b
+          created: 1748181447977
+          modified: 1748543267367
+          isPrivate: false
+          sortKey: -1748185105401
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_e237d7f0fb284ad8b284322ea60cba2d
+              name: name
+              value: "{% faker 'randomFirstName' %}"
+              disabled: true
+            - id: pair_6c037575b3854af3be48043f95b5ae4f
+              name: email
+              value: "{% faker 'randomEmail' %}"
+              disabled: true
+            - id: pair_f0e47239edcc45a983d28ccffa5d4d45
+              name: password
+              value: "{% faker 'randomPassword' %}"
+              disabled: true
+            - id: pair_7fb9d82849b04ab19e469fe6c1b73f3f
+              name: password
+              value: "12345678"
+              disabled: false
+            - id: pair_97e0ba5517524627a043097ff9285199
+              name: name
+              value: claudio
+              disabled: false
+            - id: pair_c116bdd9fa01400c9d553066198a33b5
+              name: email
+              value: claudio@gmail.com
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/users/login
+        name: Login
+        meta:
+          id: req_ded0928bdc4446c59678e4e5e44802c5
+          created: 1748181647318
+          modified: 1748543279842
+          isPrivate: false
+          sortKey: -1748185105351
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_11657fc2a4b5478bbee11c7a5c5e8d08
+              name: email
+              value: claudio@gmail.com
+              disabled: false
+            - id: pair_f5ae5c8c09314bdc863797b4df48f34d
+              name: password
+              value: "12345678"
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/users/630da6bd-c08d-4b11-b8be-981704c25d87
+        name: Find Unique
+        meta:
+          id: req_53f277ae26a246c0a9f8374a2691756f
+          created: 1748185006886
+          modified: 1748534973725
+          isPrivate: false
+          sortKey: -1748185105451
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/users/6ed585b9-334e-428f-bebf-f501e4c2b1f0
+        name: Update
+        meta:
+          id: req_0d2aadf3fccc4a6687e64895777ad312
+          created: 1748185154098
+          modified: 1748534983519
+          isPrivate: false
+          sortKey: -1748185105326
+        method: PUT
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_cc6c63d6fb8842a1b0df112f3dab417b
+              name: name
+              value: abidias
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/users
+        name: Find All
+        meta:
+          id: req_a1f22b23ea97459ca0bff18b747bdd23
+          created: 1748197854710
+          modified: 1748534970361
+          isPrivate: false
+          sortKey: -1748185105501
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/users/6ed585b9-334e-428f-bebf-f501e4c2b1f0
+        name: Delete
+        meta:
+          id: req_e8a551f570b84bc9924fb21cb270c285
+          created: 1748534647790
+          modified: 1748534985297
+          isPrivate: false
+          sortKey: -1748185105301
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Cities
+    meta:
+      id: fld_cc14bb5e1abe4d1ab27759152538eae7
+      created: 1748197895767
+      modified: 1748534901677
+      sortKey: -1748197895767
+    children:
+      - url: "{{baseUrl}}/cities"
+        name: Create
+        meta:
+          id: req_794b1e1bcfe44c86841b738545b6325c
+          created: 1748197898104
+          modified: 1748543385457
+          isPrivate: false
+          sortKey: -1748366291700.5
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_ea399468532a4ac183c82d4c696f344f
+              name: name
+              value: aaaaa
+              disabled: false
+            - id: pair_d63a6d4645514d93bbc19ab1bc70389f
+              name: description
+              value: d
+              disabled: false
+            - id: pair_ed41d29cadba4318815bf88b25ea74a9
+              name: state
+              value: e
+              disabled: false
+            - id: pair_b7a964fea6474f4ea978de14adbf34fd
+              name: imageUrl
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\528b5bb49bfa7bf59df90c7d41a20271.jpg
+            - id: pair_18cb62ef3e17415485eb2df883a7d59d
+              name: color01
+              value: e
+              disabled: false
+            - id: pair_e67e56827b2a4a0fb20b4f337d72d1f9
+              name: color02
+              value: f
+              disabled: false
+            - id: pair_fdf8aeacad7e4fbdb36282524cf268f7
+              name: adminId
+              value: 0b2ee11f-e96d-46d5-aa4e-3f8647a89879
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/cities/bdcca617-a5ab-49f5-a08c-5b35400cd8d6"
+        name: Update
+        meta:
+          id: req_bdf18ec08f974c5bae65a67e960bad0c
+          created: 1748534439109
+          modified: 1748536055531
+          isPrivate: false
+          sortKey: -1748197898204
+        method: PUT
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_b066e27cade9497683d2d271333e01c4
+              name: name
+              value: moraujo
+              disabled: true
+            - id: pair_cc1c06b5d5214b9cb3267d8871ce1815
+              name: imageUrl
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\0bea52bc18c2e97581bb20cf3c8fcd9f.jpg
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/cities/bdcca617-a5ab-49f5-a08c-5b35400cd8d6"
+        name: Find Unique
+        meta:
+          id: req_bd00aee7f5a54545b08987e464462589
+          created: 1748534685197
+          modified: 1748536046532
+          isPrivate: false
+          sortKey: -1748408390074.625
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/cities?limit=2"
+        name: Find All
+        meta:
+          id: req_783f99571e204f2aae5f47d4ff25b91c
+          created: 1748534896996
+          modified: 1748547228642
+          isPrivate: false
+          sortKey: -1748450488448.75
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/cities/bdcca617-a5ab-49f5-a08c-5b35400cd8d6"
+        name: Delete
+        meta:
+          id: req_4e7716797f3d4dbda335d31b790ee2e1
+          created: 1748534994968
+          modified: 1748536058719
+          isPrivate: false
+          sortKey: -1748197898104
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Places
+    meta:
+      id: fld_dcf81432669846219d0d6776d33f2968
+      created: 1748535629464
+      modified: 1748535629464
+      sortKey: -1748535629464
+    children:
+      - url: "{{baseUrl}}/places"
+        name: Create
+        meta:
+          id: req_c2e81516c5a04c1487b78a72c317510c
+          created: 1748535637102
+          modified: 1748545817864
+          isPrivate: false
+          sortKey: -1748535987532
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_1d483bbefced49ac8d80217ce2574e98
+              name: name
+              value: banguelino
+              disabled: false
+            - id: pair_9c9993c708094c3899988c91791c6e93
+              name: description
+              value: espetaria do bangas
+              disabled: false
+            - id: pair_e08894edd2004259b3021088bee74d16
+              name: address
+              value: frente da pedro rufino
+              disabled: false
+            - id: pair_139408431a5c4d1d84a44ae89b0d6c02
+              name: latitude
+              value: "300"
+              disabled: false
+            - id: pair_e391ccf71d5c4e43a53349ef6be3a027
+              name: longitude
+              value: "333"
+              disabled: false
+            - id: pair_89dd085321994620b3cbaf6236f8a422
+              name: category
+              value: GASTRONOMIA
+              disabled: false
+            - id: pair_677c777785b94269a80e8deca1b6d131
+              name: instagram
+              value: http://instagra.com/@banguelino
+              disabled: false
+            - id: pair_5d139e5e703345d897c67ed5aa4fbd5d
+              name: whatsapp
+              value: "88993"
+              disabled: false
+            - id: pair_1845cc7c80d64694b0023f24f85eac0f
+              name: cityId
+              value: f0c75ab0-0e04-4847-90f8-6c75f5790b2c
+              disabled: false
+            - id: pair_c466a4c6ea9f4141948e7c9fd69b5c72
+              name: imageUrl
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\195927a49a15c4bfae4f1c543a58e2b4.jpg
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/places/61a61fce-c70e-44e4-910a-ceb7139e0da0"
+        name: Update
+        meta:
+          id: req_a0e13b02fc0b4289b69244aa25910981
+          created: 1748536886012
+          modified: 1748541653942
+          isPrivate: false
+          sortKey: -1748535987632
+        method: PUT
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_79027a7bfcff45c9a0126524fdef002b
+              name: name
+              value: banguelino
+              disabled: false
+            - id: pair_0d6360e7fbc6442ba9d3bcb3f28fcab0
+              name: imageUrl
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\WhatsApp Image 2025-04-05 at
+                18.41.48_7f543dbb.jpg
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/places/61a61fce-c70e-44e4-910a-ceb7139e0da0"
+        name: Delete
+        meta:
+          id: req_3e741f62b4194aaa8218129d84cc7b30
+          created: 1748541905236
+          modified: 1748541922503
+          isPrivate: false
+          sortKey: -1748535987432
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/places?limit=2"
+        name: Find All
+        meta:
+          id: req_d6793571932d43cf9a05d18590ae32ba
+          created: 1748541924990
+          modified: 1748545829091
+          isPrivate: false
+          sortKey: -1748535987732
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/places/61a61fce-c70e-44e4-910a-ceb7139e0da0"
+        name: Find Unique
+        meta:
+          id: req_57891e8f7eff4607959e785771c69bfe
+          created: 1748541947175
+          modified: 1748541960040
+          isPrivate: false
+          sortKey: -1748535987682
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Events
+    meta:
+      id: fld_a5975e4a3b894b358b830f0d0eba0d29
+      created: 1748546249038
+      modified: 1748546249038
+      sortKey: -1748546249038
+    children:
+      - url: "{{baseUrl}}/events/"
+        name: Create
+        meta:
+          id: req_bdbf0b1e11cb443b88df5ba833f2a29b
+          created: 1748546252705
+          modified: 1748548093491
+          isPrivate: false
+          sortKey: -1748546287425
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_24a6aa0d4ac64dfd99e2a6a40a0905dd
+              name: name
+              value: fqm
+              disabled: false
+            - id: pair_b691635e1b474c6697f888f8fe609f8a
+              name: description
+              value: festival
+              disabled: false
+            - id: pair_caaa64a5e4c64087a5dcf3759758bfb3
+              name: location
+              value: bem ali
+              disabled: false
+            - id: pair_9ffae8c79bc441a58af46f065ae3bfdd
+              name: startDate
+              value: 2023-03-02
+              disabled: false
+            - id: pair_8a4217d35f984b998bc4d481faf257e3
+              name: endDate
+              value: 2023-03-05
+              disabled: false
+            - id: pair_fa639eeae1e7461098b2b68b852f56f7
+              name: startTime
+              value: 23:00
+              disabled: false
+            - id: pair_e88860c7346f4fd9923033bb83dcf96e
+              name: endTime
+              value: 5:30
+              disabled: false
+            - id: pair_c63e644872ca407aba517871d1bbf097
+              name: cityId
+              value: bdcca617-a5ab-49f5-a08c-5b35400cd8d6
+              disabled: false
+            - id: pair_2f5fe57531bb4ee3a37c7b42f843a9a0
+              name: imageUrl
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\59d80f228b92f1c3216b1064ef22e8c9.jpg
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/events/cfb4dddb-0b89-4092-9eb4-0ff8355a6249"
+        name: Update
+        meta:
+          id: req_9f6a4658675e435598283b7e432db906
+          created: 1748547364734
+          modified: 1748547957917
+          isPrivate: false
+          sortKey: -1748546287375
+        method: PUT
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_6d4c9befa8df481fa3230b15760a6819
+              name: imageUrl
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\37i9dQZF1DZ06evO33JeTg-default.jpg
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/events"
+        name: Find All
+        meta:
+          id: req_43620692661a47c6b25473fd70721590
+          created: 1748547961330
+          modified: 1748547978465
+          isPrivate: false
+          sortKey: -1748546287475
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/events/cfb4dddb-0b89-4092-9eb4-0ff8355a6249"
+        name: Find Unique
+        meta:
+          id: req_20a2ade3814d4267b6ba9addc37e8a71
+          created: 1748548013239
+          modified: 1748548058722
+          isPrivate: false
+          sortKey: -1748546287575
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/events/cfb4dddb-0b89-4092-9eb4-0ff8355a6249"
+        name: Delete
+        meta:
+          id: req_f3ef4a29b00a429bbc508782e7d19f77
+          created: 1748548073994
+          modified: 1748548092336
+          isPrivate: false
+          sortKey: -1748546287175
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_19d964f161f01d8fad2a9e4aabaef73523f180c9
+    created: 1748181438045
+    modified: 1748543365256
+  cookies:
+    - key: token
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMmVlMTFmLWU5NmQtNDZkNS1hYTRlLTNmODY0N2E4OTg3OSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0ODU0MzM2NX0.zt73wD_iX8BgFkDRqDj2AQMiSVNrxljDoqv1kOCsMn4
+      domain: localhost
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-05-25T18:31:15.345Z
+      lastAccessed: 2025-05-29T18:29:25.255Z
+      sameSite: lax
+      id: 8e194278-fccb-4294-9332-2e1f73cd0dbe
+environments:
+  name: Base Environment
+  meta:
+    id: env_19d964f161f01d8fad2a9e4aabaef73523f180c9
+    created: 1748181438043
+    modified: 1748536068196
+    isPrivate: false
+  data:
+    baseUrl: localhost:3000
