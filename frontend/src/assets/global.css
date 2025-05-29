@@ -4,6 +4,7 @@ body {
     margin: 0;
     font-family: var(--font-spline-400); /* Exemplo de fonte padrão */
     width: 100vw;
+    overflow-x: hidden;
 }
 
 @theme {

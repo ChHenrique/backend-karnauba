@@ -1,28 +1,20 @@
 
 import { useEffect, useState } from "react"
 import Glass from '../../../assets/Glass.svg'
+import Fortaleza from '../../../assets/image.png'
+import { Bigcard } from "../../../components/BigCard";
 
 export function SearchSection(){
-  const cities = ["Moraujo...", "Massapê...", "Meruoca..."];
-  const [index, setIndex] = useState<number> (0);
-
- useEffect(()=> {
-    setTimeout(()=>{
-    setIndex((prevIndex) => (prevIndex + 1) % cities.length);
-    }, 6000)
-    
-  })
-
-
 
 
     return(
           
         <div className="w-full h-[60vh] justify-center items-center flex flex-col">
 
-           <h1 className="font-roboto-700 font-semibold text-3xl">Qual cidade você quer conhecer?</h1>
+          <Bigcard name="canela" text="canelisnhas buffos regularis e pé grade" imageUrl={Fortaleza}></Bigcard>
+
            <div className="w-1/2 justify-center flex mt-6 relative">
-            <input type="text" className=" flex w-full h-12 rounded-full border-2 border-neutrals-200/25 px-2" placeholder={cities[index]}/>
+            <input type="text" className=" flex w-full h-12 rounded-full border-2 border-neutrals-200/25 px-2" placeholder='Pesquisar...'/>
             <div className=" cursor-pointer h-10 absolute right-1 top-1 bg-primary-100 rounded-full flex justify-center items-center aspect-square "><img src={Glass} alt="" className="aspect-square h-8 justify-center items-center flex" /></div>
             </div>
         </div>
