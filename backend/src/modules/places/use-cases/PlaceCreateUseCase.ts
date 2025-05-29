@@ -7,7 +7,7 @@ import { Place } from "../entities/Place";
 import { Category } from "@prisma/client";
 
 export class PlaceCreateUseCase {
-  constructor(private placeRepository: PlaceRepository) {}
+  constructor(private placeRepository: PlaceRepository) { }
 
   async execute(data: placeDTO): Promise<Place> {
     const parsedData = placeSchema.safeParse(data);
