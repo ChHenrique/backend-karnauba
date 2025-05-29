@@ -5,17 +5,18 @@ import { Card } from "../../../components/EventCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
-export function Events() {
-  const events = [
-    {
-      name: "Festival de Comida Cearense",
-      city: "Fortaleza",
-      imageUrl:
-        "https://images.unsplash.com/photo-1604079622920-8f1b2c3d4e5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
-      startDate: "05/10/2023",
-      endDate: "10/10/2023",
-    },
-  ];
+type Events ={
+  events :{
+  name: string,
+  city: string,
+  imageUrl: string,
+  startDate: string,
+  endDate: string,
+  }[]
+}
+
+export function Events({events}: Events) {
+
 
   return (
     <div className="w-full h-fit flex mt-10 items-center flex-col justify-center bg-neutrals-100">

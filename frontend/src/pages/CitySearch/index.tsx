@@ -106,6 +106,17 @@ const Hotels = [
     imageUrl: "https://source.unsplash.com/featured/?hotel,canoa-quebrada"
   }];
 
+    const events = [
+    {
+      name: "Festival de Comida Cearense",
+      city: "Fortaleza",
+      imageUrl:
+        "https://images.unsplash.com/photo-1604079622920-8f1b2c3d4e5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+      startDate: "05/10/2023",
+      endDate: "10/10/2023",
+    },
+  ];
+
    const Cities = [
     {
       name: "Fortaleza",
@@ -138,7 +149,7 @@ const Hotels = [
       <div className="w-full h-fit" ref={turisticRef}><LocalsSlider name="Pontos Turísticos em Alta" places={turisticPlaces}/></div>
       <div className="w-full h-fit" ref={restaurantRef}><LocalsSlider name="O Melhor da Gastronomia Cearense" places={gastronomicPlaces}/></div>
       <div className="w-full h-fit" ref={hotelRef}> <BigCardSlider places={Hotels}/></div>
-      <div className="w-full h-fit" ref={eventRef}><Events /></div>
+      <div className="w-full h-fit" ref={eventRef}><Events events={events}/></div>
       <Footer />
     </div>
   );
