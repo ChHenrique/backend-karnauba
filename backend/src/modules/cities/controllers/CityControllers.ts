@@ -1,4 +1,4 @@
-import { cityDTO } from "../dtos/CityDTO";
+
 import { CityCreateUseCase } from "../use-cases/CityCreateUseCase";
 import { CityDeleteUseCase } from "../use-cases/CityDeleteUseCase";
 import { CityFindUniqueUseCase } from "../use-cases/CityFindUniqueUseCase";
@@ -6,6 +6,7 @@ import { CityUpdateUseCase } from "../use-cases/CityUpdateUseCase";
 import { FastifyReply, FastifyRequest } from "fastify"
 import { handleMultipart } from "../../../shared/middlewares/multipart"
 import { CityFindAllUseCase } from "../use-cases/CityFindAllUseCase";
+import { cityDTO } from "../dtos/cityDTO";
 
 export class CityControllers {
     constructor(

@@ -1,10 +1,9 @@
 import { z } from 'zod';
 
 export const placeSchema = z.object({
-  id: z.string(),
   name: z.string().min(1),
   description: z.string().min(1),
-  imageUrl: z.string().url().optional(), 
+  imageUrl: z.string().optional(), 
   address: z.string().min(1),
   latitude: z.number().optional(),
   longitude: z.number().optional(),

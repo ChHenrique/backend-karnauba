@@ -10,6 +10,7 @@ import path from 'path';
 import { CityRoutes } from "./modules/cities/routes/cityRoutes";
 import { EventRoutes } from "./modules/events/routes/eventRoutes";
 import { ImageRoutes } from "./modules/images/routes/imageRoutes";
+import { PlaceRoutes } from "./modules/places/routes/placeRoutes";
 
 
 
@@ -32,6 +33,7 @@ fastify.register(cors, {
 new UserRoutes(fastify).registerRoutes();
 new CityRoutes(fastify).registerRoutes();
 new EventRoutes(fastify).registerRoutes();
+new PlaceRoutes(fastify).registerRoutes()
 new ImageRoutes(fastify).registerRoutes();
 
 

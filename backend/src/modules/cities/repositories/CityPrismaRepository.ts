@@ -1,64 +1,81 @@
-import { prisma } from "../../../config/prisma"
-import { City } from "../entities/city"
-import { CityRepository } from "./CityRepository"
+import { prisma } from '../../../config/prisma';
+import { parseImageInput } from '../../../shared/utils/parseImageInput'; // Ajuste o caminho conforme seu projeto
+import { City } from '../entities/city';
+import { CityRepository } from './CityRepository';
 
 export class CityPrismaRepository implements CityRepository {
     async findAll(): Promise<City[] | null> {
         const cities = await prisma.city.findMany({
-            include: { 
+            include: {
                 places: true,
                 events: true
             }
-        })
+        });
 
-        return cities
+        return cities.map(City.fromPrisma);
     }
 
     async findUnique(id: string): Promise<City | null> {
-        const city = await prisma.city.findUnique({
-            where: { id: id },
-            include: { 
-                places: true,
-                events: true
-            }
-        })
+        const cityData = await prisma.city.findUnique({
+            where: { id },
+            include: { places: true, events: true }
+        });
 
-        return city
+        if (!cityData) return null;
+
+        return City.fromPrisma(cityData);
     }
 
     async create(city: City): Promise<City> {
-        const data = await prisma.city.create({
+        const created = await prisma.city.create({
             data: {
                 name: city.name,
                 state: city.state,
                 description: city.description,
                 imageUrl: city.imageUrl ?? '',
                 adminId: city.adminId,
-                id: city.id
+                id: city.id,
+                color01: city.color01 ?? null,
+                color02: city.color02 ?? null
             }
-        })
+        });
 
-        return data
+        const completeCity = await prisma.city.findUnique({
+            where: { id: created.id },
+            include: { places: true, events: true }
+        });
+
+        return City.fromPrisma(completeCity);
     }
 
-    async update(id: string, data: Partial<City>): Promise<City> {
-        const city = await prisma.city.update({
-            where: { id: id },
 
+    async update(id: string, data: Partial<City>): Promise<City> {
+        await prisma.city.update({
+            where: { id },
             data: {
                 name: data.name,
                 state: data.state,
                 description: data.description,
-                imageUrl: data.imageUrl
+                imageUrl: data.imageUrl ?? undefined,
+                color01: data.color01 ?? undefined,
+                color02: data.color02 ?? undefined
             }
-        })
+        });
 
-        return city
+        const updatedCity = await prisma.city.findUnique({
+            where: { id },
+            include: { places: true, events: true }
+        });
+
+        if (!updatedCity) throw new Error('City not found after update');
+
+        return City.fromPrisma(updatedCity);
     }
+
+
     async delete(id: string): Promise<void> {
         await prisma.city.delete({
             where: { id: id }
-        })
+        });
     }
-
 }

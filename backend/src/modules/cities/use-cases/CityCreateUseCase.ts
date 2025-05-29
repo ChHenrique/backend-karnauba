@@ -1,38 +1,50 @@
-import { cityDTO } from "../dtos/CityDTO"
-import { CitySchema } from "../schemas/citySchema"
+import { CitySchema } from "../schemas/citySchema";
+import { ServerError } from "../../../shared/errors/serverError";
+import { randomUUID } from "crypto";
+import { CityRepository } from "../repositories/CityRepository";
+import { City } from "../entities/city";
+import { cityDTO } from "../dtos/cityDTO";
 
-import { ServerError } from "../../../shared/errors/serverError"
-import { randomUUID } from "crypto"
-import { CityRepository } from "../repositories/CityRepository"
-import { City } from "../entities/city"
+import { parseImageInput } from "../../../shared/utils/parseImageInput";
 
 export class CityCreateUseCase {
-    constructor(
-        private cityRepository: CityRepository
-    ) { }
+  constructor(private readonly cityRepository: CityRepository) {}
 
-    async execute(data: cityDTO): Promise<City> {
-        const parsedData = CitySchema.safeParse(data)
-        if (!parsedData.success) {
-            throw new ServerError('Validation Error')
-        }
+  async execute(data: cityDTO): Promise<City> {
+    const validation = CitySchema.safeParse(data);
 
-        const id = randomUUID()
-        const { name, state, description, imageUrl, adminId, color01, color02 } = parsedData.data
-
-        const city = new City(
-            id,
-            name,
-            state,
-            description ?? null,
-            imageUrl ?? null,
-            color01 ?? null,
-            color02 ?? null,
-            adminId
-        )
-
-        await this.cityRepository.create(city)
-
-        return city
+    if (!validation.success) {
+      console.log("Erro na validação:", validation.error.format());
+      throw new ServerError(
+        "Validation Error",
+        400,
+        validation.error.format()
+      );
     }
+
+    const {
+      name,
+      state,
+      description = null,
+      imageUrl = null,
+      adminId,
+      color01 = null,
+      color02 = null,
+    } = validation.data;
+
+    const city = new City(
+      randomUUID(),
+      name,
+      state,
+      description,
+      parseImageInput(imageUrl),
+      color01,
+      color02,
+      adminId
+    );
+
+    await this.cityRepository.create(city);
+
+    return city;
+  }
 }

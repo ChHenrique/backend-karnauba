@@ -5,14 +5,33 @@ import { PlaceRepository } from "../repositories/PlaceRepository";
 import { placeSchema } from "../schemas/placeSchema";
 import { Place } from "../entities/Place";
 import { Category } from "@prisma/client";
+import { parseImageInput } from "../../../shared/utils/parseImageInput";
 
 export class PlaceCreateUseCase {
-  constructor(private placeRepository: PlaceRepository) { }
+  constructor(private placeRepository: PlaceRepository) {}
 
-  async execute(data: placeDTO): Promise<Place> {
-    const parsedData = placeSchema.safeParse(data);
+  private normalizeInput(data: any): placeDTO {
+    return {
+      ...data,
+      imageUrl: Array.isArray(data.imageUrl) ? data.imageUrl[0] : data.imageUrl,
+      latitude: Number(data.latitude),
+      longitude: Number(data.longitude),
+    };
+  }
 
-    if (!parsedData) throw new ServerError("Validation Error");
+  async execute(data: any): Promise<Place> {
+    const normalizedData = this.normalizeInput(data);
+
+    const parsedData = placeSchema.safeParse(normalizedData);
+
+    if (!parsedData.success) {
+      console.log("Erro na validação:", parsedData.error.format());
+      throw new ServerError(
+        "Validation Error",
+        400,
+        parsedData.error.format()
+      );
+    }
 
     const {
       name,
@@ -25,16 +44,18 @@ export class PlaceCreateUseCase {
       longitude,
       instagram,
       whatsapp,
-    } = parsedData.data!;
+    } = parsedData.data;
 
     const id = randomUUID();
     const categoryEnum = Category[category as keyof typeof Category];
+
+    const parsedImage = parseImageInput(imageUrl) ?? "";
 
     const place = new Place(
       id,
       name,
       description,
-      imageUrl ?? "",
+      parsedImage,
       address,
       latitude ?? 0,
       longitude ?? 0,
@@ -44,6 +65,8 @@ export class PlaceCreateUseCase {
       cityId ?? ""
     );
 
-    return place
+    await this.placeRepository.create(place);
+
+    return place;
   }
 }

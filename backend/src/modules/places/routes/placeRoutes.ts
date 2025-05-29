@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { verifyJWT, verifyAdmin } from "../../../shared/middlewares/authMiddleware";
-import { placeInstance } from "../repositories/PlaceInstance";
+import { placeInstance } from "../repositories/placeInstance";
+
 
 export class PlaceRoutes {
   constructor(private readonly app: FastifyInstance) {}
