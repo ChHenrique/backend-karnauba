@@ -1,6 +1,6 @@
 import { ServerError } from "../../../shared/errors/serverError";
 import { cityDTO } from "../dtos/cityDTO";
-import { City } from "../entities/city";
+import { City } from "../entities/City";
 import { CityRepository } from "../repositories/CityRepository";
 import { parseImageInput } from "../../../shared/utils/parseImageInput";
 

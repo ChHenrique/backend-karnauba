@@ -43,7 +43,9 @@ export class EventController {
     }
 
     async findAll(req: FastifyRequest, reply: FastifyReply) {
-        const events = await this.findAllUseCase.execute();
+        const { limit } = req.query as { limit?: string };
+        const parsedLimit = limit ? Number(limit) : undefined;
+        const events = await this.findAllUseCase.execute(parsedLimit);
         reply.send(events);
     }
 }

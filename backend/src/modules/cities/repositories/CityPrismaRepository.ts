@@ -1,11 +1,13 @@
 import { prisma } from '../../../config/prisma';
 import { parseImageInput } from '../../../shared/utils/parseImageInput'; // Ajuste o caminho conforme seu projeto
-import { City } from '../entities/city';
+import { City } from '../entities/City';
 import { CityRepository } from './CityRepository';
 
 export class CityPrismaRepository implements CityRepository {
-    async findAll(): Promise<City[] | null> {
+    async findAll(limit?: number): Promise<City[] | null> {
         const cities = await prisma.city.findMany({
+            take: limit ?? undefined,
+            orderBy: { name: 'asc' },
             include: {
                 places: true,
                 events: true

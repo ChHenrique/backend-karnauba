@@ -43,10 +43,15 @@ export class CityControllers {
     }
 
     async findAll(req: FastifyRequest, reply: FastifyReply) {
-        const cities = await this.findAllUseCase.execute()
+        const { limit } = req.query as { limit?: string };
 
-        reply.send(cities)
+        const parsedLimit = limit ? Number(limit) : undefined;
+
+        const cities = await this.findAllUseCase.execute(parsedLimit);
+
+        reply.send(cities);
     }
+
 
 
 }
