@@ -18,7 +18,7 @@ export function Footer(){
             </div>
 
             <img src={Logo} alt="" className='h-12' />
-            <h1 className="text-neutrals-100/30 font-spline-400">Cactour @2025 Todos os direitos reservados</h1>
+            <h1 className="text-neutrals-100/30 font-spline-400 text-sm text-center">Cactour @2025 Todos os direitos reservados</h1>
 
         </div>
     )

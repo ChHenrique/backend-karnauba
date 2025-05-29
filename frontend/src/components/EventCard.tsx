@@ -10,8 +10,8 @@ export function Card({imageUrl, name, city, startDate, endDate}: {imageUrl: stri
         
         className="h-full cursor-pointer w-fit flex flex-col text-neutrals-200 justify-end items-start overflow-hidden relative"
         >
-            <div className="h-50 aspect-square flex justify-end items-end bg-primary-200 rounded-2xl">
-            <div className="h-48 aspect-square rounded-2xl" style={{background: `url(${imageUrl})`, backgroundSize: 'cover'}}>
+            <div className="h-50 max-md:h-36 aspect-square flex justify-end items-end bg-primary-200 rounded-2xl">
+            <div className="h-48 max-md:h-32 aspect-square rounded-2xl" style={{background: `url(${imageUrl})`, backgroundSize: 'cover'}}>
             <div className="h-full z-10 hover:bg-gray-100/15 absolute duration-200  w-full "></div>
             
             </div></div>

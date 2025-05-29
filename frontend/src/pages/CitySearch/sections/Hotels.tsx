@@ -24,9 +24,9 @@ export function Hotels() {
   ];
 
   return (
-    <div className="w-full h-[70vh] mt-20 flex justify-center items-center">
-      <div className="w-full h-[70vh] flex justify-center items-center">
-        <div className="w-full max-w-5xl">
+    <div className="w-full h-fit mt-20 flex justify-center items-center">
+      <div className="w-full h-fit flex justify-center items-center">
+        <div className="w-full max-w-6xl">
           <Swiper
             slidesPerView={1}
             centeredSlides={true}

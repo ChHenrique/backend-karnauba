@@ -24,20 +24,20 @@ export function CardCity() {
   ];
 
   return (
-    <div className="w-full h-[70vh] flex justify-center items-center">
-      <div className="w-full h-[70vh] flex justify-center items-center">
-        <div className="w-full max-w-5xl">
+    <div className="w-full h-fit  flex justify-center items-center">
+      <div className="w-full h-fit  flex justify-center items-center">
+        <div className="w-full max-w-6xl">
           <Swiper
             slidesPerView={1}
             centeredSlides={true}
             autoplay={{ delay: 7000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             modules={[Autoplay, Navigation, Pagination]}
-            className="w-full h-full"
+            className="w-full h-full max-md:aspect-square"
           >
             {Cidades.map((cidade, index) => (
               <SwiperSlide
-                className="flex justify-center items-center"
+                className="flex justify-center items-center "
                 key={index}
               >
                 <Bigcard
