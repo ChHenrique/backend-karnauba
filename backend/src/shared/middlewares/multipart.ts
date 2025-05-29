@@ -6,7 +6,7 @@ export async function handleMultipart(
   folder?: string
 ): Promise<Record<string, any>> {
   const parts = req.parts();
-  const data: Record<string, any> = {}
+  const data: Record<string, any> = {};
 
   for await (const part of parts) {
     if (part.type === "file" && part.filename) {
@@ -21,8 +21,15 @@ export async function handleMultipart(
         folder
       );
 
-      data[part.fieldname] = photoUrl;
+
+      if (data[part.fieldname]) {
+        data[part.fieldname].push(photoUrl);
+      } else {
+        data[part.fieldname] = [photoUrl];
+      }
+
     } else if (part.type === "field") {
+
       data[part.fieldname] = part.value;
     }
   }

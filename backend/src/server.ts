@@ -9,6 +9,7 @@ import path from 'path';
 
 import { CityRoutes } from "./modules/cities/routes/cityRoutes";
 import { EventRoutes } from "./modules/events/routes/eventRoutes";
+import { ImageRoutes } from "./modules/images/routes/imageRoutes";
 
 
 
@@ -31,6 +32,7 @@ fastify.register(cors, {
 new UserRoutes(fastify).registerRoutes();
 new CityRoutes(fastify).registerRoutes();
 new EventRoutes(fastify).registerRoutes();
+new ImageRoutes(fastify).registerRoutes();
 
 
 
