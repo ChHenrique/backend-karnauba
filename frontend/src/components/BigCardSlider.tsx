@@ -1,27 +1,23 @@
 import "swiper/css";
 import "swiper/css/pagination";
-import Fortaleza from "../../../assets/image.png";
 
 import { Pagination } from 'swiper/modules';
 
-import { Bigcard } from "../../../components/BigCard";
+import { Bigcard } from "./BigCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
-export function Hotels() {
-  const Cidades = [
-    {
-      name: "Fortaleza",
-      text: "A capital do Ceará, conhecida por suas belas praias e cultura vibrante.",
-      imageUrl: Fortaleza,
-    },
-    {
-      name: "Canoa Quebrada",
-      text: "Famosa por suas falésias e vida noturna animada.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1604079622920-8f1b2c3d4e5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
-    },
-  ];
+
+type PlaceDefinition = {
+  places: {
+    name: string,
+    description: string,
+    imageUrl: string,
+  }[],
+}
+
+export function BigCardSlider({places}: PlaceDefinition) {
+
 
   return (
     <div className="w-full h-fit mt-20 flex justify-center items-center">
@@ -35,15 +31,15 @@ export function Hotels() {
             modules={[Autoplay, Navigation, Pagination]}
             className="w-full h-full"
           >
-            {Cidades.map((cidade, index) => (
+            {places.map((place, index) => (
               <SwiperSlide
                 className="flex justify-center items-center"
                 key={index}
               >
                 <Bigcard
-                  imageUrl={cidade.imageUrl}
-                  name={cidade.name}
-                  text={cidade.text}
+                  imageUrl={place.imageUrl}
+                  name={place.name}
+                  text={place.description}
                 />
               </SwiperSlide>
             ))}
