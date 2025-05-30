@@ -1,5 +1,7 @@
 import { Place, Event } from "@prisma/client";
 
+export type PlaceWithCityName = Place & { cityName: string };
+
 export class City {
     constructor(
         public readonly id: string,
@@ -10,22 +12,29 @@ export class City {
         public color01: string | null,
         public color02: string | null,
         public readonly adminId: string,
-        public places: Place[] = [],   
-        public events: Event[] = []    
+        public places: PlaceWithCityName[] = [],
+        public events: Event[] = []
     ) {}
 
     static fromPrisma(data: any): City {
-        return new City(
-            data.id,
-            data.name,
-            data.state,
-            data.description,
-            data.imageUrl,
-            data.color01,
-            data.color02,
-            data.adminId,
-            data.places || [],
-            data.events || []
-        );
-    }
+    return new City(
+        data.id,
+        data.name,
+        data.state,
+        data.description,
+        data.imageUrl,
+        data.color01,
+        data.color02,
+        data.adminId,
+        (data.places || []).map((place: any) => {
+            const { city, ...rest } = place;
+            return {
+                ...rest,
+                cityName: city?.name ?? null
+            };
+        }),
+        data.events || []
+    );
 }
+}
+

@@ -1,5 +1,4 @@
 import { prisma } from '../../../config/prisma';
-import { parseImageInput } from '../../../shared/utils/parseImageInput'; // Ajuste o caminho conforme seu projeto
 import { City } from '../entities/City';
 import { CityRepository } from './CityRepository';
 
@@ -9,7 +8,13 @@ export class CityPrismaRepository implements CityRepository {
             take: limit ?? undefined,
             orderBy: { name: 'asc' },
             include: {
-                places: true,
+                places: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                },
                 events: true
             }
         });
@@ -20,7 +25,16 @@ export class CityPrismaRepository implements CityRepository {
     async findUnique(id: string): Promise<City | null> {
         const cityData = await prisma.city.findUnique({
             where: { id },
-            include: { places: true, events: true }
+            include: {
+                places: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                },
+                events: true
+            }
         });
 
         if (!cityData) return null;
@@ -44,12 +58,20 @@ export class CityPrismaRepository implements CityRepository {
 
         const completeCity = await prisma.city.findUnique({
             where: { id: created.id },
-            include: { places: true, events: true }
+            include: {
+                places: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                },
+                events: true
+            }
         });
 
         return City.fromPrisma(completeCity);
     }
-
 
     async update(id: string, data: Partial<City>): Promise<City> {
         await prisma.city.update({
@@ -66,7 +88,16 @@ export class CityPrismaRepository implements CityRepository {
 
         const updatedCity = await prisma.city.findUnique({
             where: { id },
-            include: { places: true, events: true }
+            include: {
+                places: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                },
+                events: true
+            }
         });
 
         if (!updatedCity) throw new Error('City not found after update');
@@ -74,10 +105,9 @@ export class CityPrismaRepository implements CityRepository {
         return City.fromPrisma(updatedCity);
     }
 
-
     async delete(id: string): Promise<void> {
         await prisma.city.delete({
-            where: { id: id }
+            where: { id }
         });
     }
 }
