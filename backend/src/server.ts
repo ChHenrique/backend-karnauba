@@ -25,8 +25,10 @@ fastify.register(fastifyStatic, {
 
 dotenv.config();
 fastify.register(cors, {
-  origin: true,
+  origin: 'http://localhost:5173',
+  credentials: true, 
 });
+
 
 
 

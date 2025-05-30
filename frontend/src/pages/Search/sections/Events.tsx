@@ -1,21 +1,23 @@
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Card } from "../../../components/EventCard";
+import { Card } from "../../../components/Card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
-export function Events() {
-  const events = [
-    {
-      name: "Festival de Comida Cearense",
-      city: "Fortaleza",
-      imageUrl:
-        "https://images.unsplash.com/photo-1604079622920-8f1b2c3d4e5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
-      startDate: "05/10/2023",
-      endDate: "10/10/2023",
-    },
-  ];
+type Events ={
+  events :{
+  name: string,
+  city: string,
+  imageUrl: string,
+  startDate: string,
+  endDate: string,
+  }[],
+  color02: string,
+}
+
+export function Events({events, color02}: Events) {
+
 
   return (
     <div className="w-full h-fit flex mt-10 items-center flex-col justify-center bg-neutrals-100">
@@ -26,18 +28,18 @@ export function Events() {
         <div className="w-full max-w-6xl">
           <Swiper
             slidesPerView={5}
- breakpoints={{
+                        breakpoints={{
               0: {
-                slidesPerView: 2,
+                slidesPerView: 2.5,
               },
               600: {
-                slidesPerView:3,
+                slidesPerView:3.5,
               },
               720: {
-                slidesPerView: 3,
+                slidesPerView: 3.5,
               },
               860: {
-                slidesPerView: 3,
+                slidesPerView: 3.5,
               },
               1024: {
                 slidesPerView: 4,
@@ -61,6 +63,7 @@ export function Events() {
                   city={events.city}
                   startDate={events.startDate}
                   endDate={events.endDate}
+                  color02={color02}
                 />
               </SwiperSlide>
             ))}
