@@ -15,7 +15,13 @@ export class CityPrismaRepository implements CityRepository {
                         }
                     }
                 },
-                events: true
+                events: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                }
             }
         });
 
@@ -33,7 +39,13 @@ export class CityPrismaRepository implements CityRepository {
                         }
                     }
                 },
-                events: true
+                events: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                }
             }
         });
 
@@ -66,7 +78,13 @@ export class CityPrismaRepository implements CityRepository {
                         }
                     }
                 },
-                events: true
+                events: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                }
             }
         });
 
@@ -96,7 +114,13 @@ export class CityPrismaRepository implements CityRepository {
                         }
                     }
                 },
-                events: true
+                events: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                }
             }
         });
 
@@ -111,30 +135,38 @@ export class CityPrismaRepository implements CityRepository {
         });
     }
 
-async findPlacesAndEventsById(id: string): Promise<Pick<City, 'places' | 'events'> | null> {
-    const city = await prisma.city.findUnique({
-        where: { id },
-        select: {
-            places: {
-                include: {
-                    city: {
-                        select: { name: true }
+    async findPlacesAndEventsById(id: string): Promise<Pick<City, 'places' | 'events'> | null> {
+        const city = await prisma.city.findUnique({
+            where: { id },
+            select: {
+                places: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
+                    }
+                },
+                events: {
+                    include: {
+                        city: {
+                            select: { name: true }
+                        }
                     }
                 }
-            },
-            events: true
-        }
-    });
+            }
+        });
 
-    if (!city) return null;
+        if (!city) return null;
 
-    return {
-        places: city.places.map((place: any) => ({
-            ...place,
-            cityName: place.city.name
-        })),
-        events: city.events
-    };
-}
-
+        return {
+            places: city.places.map((place: any) => ({
+                ...place,
+                cityName: place.city.name
+            })),
+            events: city.events.map((event: any) => ({
+                ...event,
+                cityName: event.city.name
+            }))
+        };
+    }
 }
