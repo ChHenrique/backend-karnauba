@@ -110,4 +110,22 @@ export class CityPrismaRepository implements CityRepository {
             where: { id }
         });
     }
+
+    async findPlacesAndEventsById(id: string): Promise<Pick<City, 'places' | 'events'> | null> {
+    const city = await prisma.city.findUnique({
+        where: { id },
+        select: {
+            places: true,
+            events: true
+        }
+    });
+
+    if (!city) return null;
+
+    return {
+        places: city.places,
+        events: city.events
+    };
+}
+
 }

@@ -1,7 +1,7 @@
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Card } from "../../../components/EventCard";
+import { Card } from "../../../components/Card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 

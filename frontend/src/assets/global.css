@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 body {
     margin: 0;
     font-family: var(--font-spline-400); /* Exemplo de fonte padrão */
