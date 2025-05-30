@@ -2,27 +2,32 @@ import fs from "fs";
 import path from "path";
 import { pipeline } from "stream/promises";
 import { UploadProvider } from "../uploadProvider/uploadProvider";
+import { randomUUID } from "crypto";
 
 export class LocalUploadProvider implements UploadProvider {
   async upload(
     file: { filename: string; mimetype: string; stream: NodeJS.ReadableStream },
     folder?: string
   ): Promise<string> {
-
     const baseUploadPath = path.resolve(__dirname, "..", "..", "..", "..", "uploads");
     const uploadFolder = folder ? path.join(baseUploadPath, folder) : baseUploadPath;
 
     fs.mkdirSync(uploadFolder, { recursive: true });
 
-    const filePath = path.join(uploadFolder, file.filename);
+    // Extrair extensão do arquivo original
+    const ext = path.extname(file.filename); // ex: ".jpg"
+    // Gerar nome único usando UUID
+    const uniqueName = randomUUID() + ext;
+
+    const filePath = path.join(uploadFolder, uniqueName);
     const writeStream = fs.createWriteStream(filePath);
 
     await pipeline(file.stream, writeStream);
-    const relativePath = folder ? `/uploads/${folder}/${file.filename}` : `/uploads/${file.filename}`;
+
+    const relativePath = folder ? `/uploads/${folder}/${uniqueName}` : `/uploads/${uniqueName}`;
 
     return relativePath;
   }
-
 
   async delete(file: string, folder?: string): Promise<void> {
     const baseUploadPath = path.resolve(__dirname, "..", "..", "..", "..", "uploads");
@@ -36,5 +41,4 @@ export class LocalUploadProvider implements UploadProvider {
       }
     }
   }
-
 }
