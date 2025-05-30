@@ -28,4 +28,18 @@ export class ImagePrismaRepository implements ImageRepository {
 
     return images;
   }
+
+  async findById(id: string): Promise<Image | null> {
+    const image = await prisma.image.findUnique({
+      where: { id }
+    });
+    
+    return image;
+  }
+
+    async deleteById(id: string): Promise<void> {
+    await prisma.image.delete({
+      where: { id },
+    });
+  }
 }

@@ -28,6 +28,13 @@ export class LocalUploadProvider implements UploadProvider {
     const baseUploadPath = path.resolve(__dirname, "..", "..", "..", "..", "uploads");
     const filePath = folder ? path.resolve(baseUploadPath, folder, file) : path.resolve(baseUploadPath, file);
 
-    fs.unlinkSync(filePath);
+    try {
+      await fs.promises.unlink(filePath);
+    } catch (err: any) {
+      if (err.code !== "ENOENT") {
+        throw err;
+      }
+    }
   }
+
 }
