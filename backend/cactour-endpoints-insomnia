@@ -605,12 +605,13 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{baseUrl}}/events"
+      - url: "{{baseUrl}}/images?modelId=cfb4dddb-0b89-4092-9eb4-0ff8355a6249&modelType\
+          =EVENT"
         name: Find All
         meta:
           id: req_43620692661a47c6b25473fd70721590
           created: 1748547961330
-          modified: 1748547978465
+          modified: 1748562172115
           isPrivate: false
           sortKey: -1748546287475
         method: GET
@@ -653,6 +654,97 @@ collection:
           modified: 1748548092336
           isPrivate: false
           sortKey: -1748546287175
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Images
+    meta:
+      id: fld_c2f881346b524f718717670393bbef3d
+      created: 1748561875314
+      modified: 1748561875314
+      sortKey: -1748561875314
+    children:
+      - url: "{{baseUrl}}/images"
+        name: Create
+        meta:
+          id: req_47fdc6529f1a48fdb83f2cff68208fbd
+          created: 1748561870789
+          modified: 1748562774232
+          isPrivate: false
+          sortKey: -1748561881200
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_9977a0c646724ddfb07e58bca0391f5e
+              name: modelType
+              value: Event
+              disabled: false
+            - id: pair_f7eef664e3d342a7a18a14d064941d1e
+              name: modelId
+              value: cfb4dddb-0b89-4092-9eb4-0ff8355a6249
+              disabled: false
+            - id: pair_48f98c70b9324f6ab84b3ed74846867e
+              name: images
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\4re1aoqk6p2b1.jpg
+            - id: pair_dac13259b9064882ad0a251dfb695f8f
+              name: images
+              disabled: false
+              type: file
+              fileName: C:\Users\marco\Pictures\37i9dQZF1DZ06evO33JeTg-default.jpg
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/images?modelId=cfb4dddb-0b89-4092-9eb4-0ff8355a6249&modelType\
+          =EVENT"
+        name: Find Id, Modeltype
+        meta:
+          id: req_0d45384185754fea8432d663687e9445
+          created: 1748562158693
+          modified: 1748562544961
+          isPrivate: false
+          sortKey: -1748561881300
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{baseUrl}}/images/356da885-4835-4921-b0c7-116ec2609550"
+        name: Delete
+        meta:
+          id: req_0d4261983856405693bc70561480d7df
+          created: 1748564562974
+          modified: 1748564798965
+          isPrivate: false
+          sortKey: -1748561881400
         method: DELETE
         headers:
           - name: User-Agent
