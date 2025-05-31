@@ -38,7 +38,7 @@ export function SearchSection({PlacesEvents, color02}: Params) {
   useEffect(() => {
     const filtered = Filter({ search, categories, places: PlacesEvents });
     setFilteredPlaces(filtered);
-  }, [search, categories]);
+  }, [search, categories, PlacesEvents]);
 
 
 
@@ -87,7 +87,7 @@ export function SearchSection({PlacesEvents, color02}: Params) {
             key={place.name}
             imageUrl={place.imageUrl}
             name={place.name}
-            city={place.city}
+            city={place.cityName}
             startDate={place.startDate}
             endDate={place.endDate}
             color02={color02}

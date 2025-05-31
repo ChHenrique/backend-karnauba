@@ -22,6 +22,11 @@
       imageUrl: string,
       category: string,
       city: string
+      latitude?: number,
+      longitude?: number
+      adress?: string,
+      whatsapp?: string,
+      instagram?: string,
     }[],
     events: {
       id: string,

@@ -1,6 +1,6 @@
-import Fortaleza from "../../../assets/image.png";
 
 import { Bigcard } from "../../../components/BigCard";
+import { BaseURL } from "../../../lib/axios.config";
 
 
 type CardCityProps = {
@@ -10,13 +10,7 @@ type CardCityProps = {
 }
 
 export function CardCity({cityName, cityText, cityImageUrl}: CardCityProps) {
-  const Cidades = [
-    {
-      name: "Fortaleza",
-      text: "A capital do Ceará, conhecida por suas belas praias e cultura vibrante.",
-      imageUrl: Fortaleza,
-    },
-  ];
+
 
   return (
     <div className="w-full h-fit  flex justify-center items-center ">

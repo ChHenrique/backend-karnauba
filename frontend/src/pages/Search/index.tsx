@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { GetCityInfo } from "./services/GetCity";
+import { GetCityInfo } from "../../services/GetCity";
 
 import type { cityDataDTO } from "../../dto/cityDTO";
 import type { EventPlaceDTO } from "../../dto/Place/EventDef";
@@ -46,7 +46,7 @@ export function Search() {
           data.places.filter((place) => place.category === "HOTEL")
         );
 
-
+         console.log(data.places);
         setAllArray([
           ...data.places,
           ...data.events.map((event) => ({
@@ -91,7 +91,7 @@ export function Search() {
         }}
       >
         <CardCity
-          cityImageUrl="#"
+          cityImageUrl={city?.imageUrl || "#"}
           cityName={city?.name || "Cidade"}
           cityText={city?.description || "Descrição"}
         />

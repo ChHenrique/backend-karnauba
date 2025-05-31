@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import type { PlaceDefinition } from "../dto/placeDefinitionDTO";
 
-export function LocalsSlider({name, places, color02 , city}: PlaceDefinition) {
+export function LocalsSlider({name, places, color02 }: PlaceDefinition) {
 
   return (
     <div className="w-full h-fit flex mt-10 items-center flex-col justify-center bg-neutrals-100">
@@ -49,7 +49,7 @@ export function LocalsSlider({name, places, color02 , city}: PlaceDefinition) {
                 <Card
                   imageUrl={places.imageUrl}
                   name={places.name}
-                  city={city}
+                  city={places.cityName}
                   color02={color02 || "#F1DEFE"} // Default color if not provided
                 />
               </SwiperSlide>

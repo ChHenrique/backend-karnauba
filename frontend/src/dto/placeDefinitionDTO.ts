@@ -1,10 +1,9 @@
 export type PlaceDefinition = {
   name: string,
   color02?: string,
-  city: string,
   places: {
     name: string,
-    city: string,
+    cityName: string,
     imageUrl: string,
   }[],
 }
