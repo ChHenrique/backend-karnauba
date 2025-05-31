@@ -6,21 +6,14 @@ import { placeSchema } from "../schemas/placeSchema";
 import { Place } from "../entities/Place";
 import { Category } from "@prisma/client";
 import { parseImageInput } from "../../../shared/utils/parseImageInput";
+import { normalizePlaceInput } from "../utils/normalizePlaceInput";
 
 export class PlaceCreateUseCase {
   constructor(private placeRepository: PlaceRepository) {}
 
-  private normalizeInput(data: any): placeDTO {
-    return {
-      ...data,
-      imageUrl: Array.isArray(data.imageUrl) ? data.imageUrl[0] : data.imageUrl,
-      latitude: Number(data.latitude),
-      longitude: Number(data.longitude),
-    };
-  }
 
   async execute(data: any): Promise<Place> {
-    const normalizedData = this.normalizeInput(data);
+    const normalizedData = normalizePlaceInput(data);
 
     const parsedData = placeSchema.safeParse(normalizedData);
 
