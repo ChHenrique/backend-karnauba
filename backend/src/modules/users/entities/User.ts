@@ -1,4 +1,5 @@
 import { Role } from "@prisma/client";
+export { Role };
 
 export class User {
     constructor(

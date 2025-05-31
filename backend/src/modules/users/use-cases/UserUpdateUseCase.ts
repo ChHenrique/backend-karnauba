@@ -1,36 +1,37 @@
 import bcrypt from "bcryptjs";
 import { ServerError } from "../../../shared/errors/serverError";
 import { userDTO } from "../dtos/userDTO";
-import { userSchema } from "../schemas/userSchema";
+import { userUpdateSchema } from "../schemas/userSchema";
 import { UserRepository } from "../repositories/UserRepository";
+import { Role } from "../entities/User";
 
 export class UserUpdateUseCase {
-    constructor(private userRepository: UserRepository){}
+    constructor(private userRepository: UserRepository) { }
 
-    async execute(id: string, data: userDTO){
-        const parsed = userSchema.partial().safeParse(data);
-        if (!parsed.success) throw new ServerError("Validation failed", 400);
+    async execute(id: string, data: Partial<userDTO>) {
+        const result = userUpdateSchema.safeParse(data);
+        if (!result.success) throw new ServerError("Validation failed", 400);
 
-        const { name, email, password } = parsed.data!;
+        const { name, email, password, role } = result.data;
 
         const user = await this.userRepository.findById(id);
-        if(!user) throw new ServerError("User not found", 404);
+        if (!user) throw new ServerError("User not found", 404);
 
         if (email && email !== user.email) {
             const emailExists = await this.userRepository.findByEmail(email);
             if (emailExists) throw new ServerError("This email is already in use", 409);
-            user.email = email;
         }
 
-        if (name) user.name = name;
+        const updateData: Partial<userDTO> & { password?: string; role?: Role } = {};
 
-        if (password) {
-        user.password = await bcrypt.hash(password, 8)
-        }
+        if (name) updateData.name = name;
+        if (email && email !== user.email) updateData.email = email;
+        if (role) updateData.role = role;
 
-        const updatedUser = await this.userRepository.update(id, user);
+        if (password) updateData.password = await bcrypt.hash(password, 8);
 
-       return updatedUser;
+        const updatedUser = await this.userRepository.update(id, updateData);
 
+        return updatedUser;
     }
 }
