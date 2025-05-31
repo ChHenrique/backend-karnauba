@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Card({
   imageUrl,
@@ -15,10 +16,15 @@ export function Card({
   endDate?: string;
   color02?: string;
 }) {
+  const cidade = "Santana do Acarau";
+  const citySlug = cidade.toLowerCase().replace(/\s+/g, '-');
+  
    const cardRef = useRef<HTMLDivElement>(null);
+   const navigate = useNavigate();
   const handleMouseMove = (e: React.MouseEvent) => {
     const card = cardRef.current;
     if (!card) return;
+    console.log(citySlug)
 
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -41,8 +47,8 @@ export function Card({
 
 
   return (
-    <div className="h-72 items-start cursor-pointer w-fit flex flex-col text-neutrals-200 justify-start overflow-hidden relative">
-      <div
+    <div onClick={() => navigate(`/city/${citySlug}-ce/local/${name}`)} className="h-72 items-start cursor-pointer w-fit flex flex-col text-neutrals-200 justify-start overflow-hidden relative">
+      <div 
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

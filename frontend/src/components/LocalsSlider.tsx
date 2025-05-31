@@ -4,7 +4,7 @@ import "swiper/css/pagination";
 import { Card } from "../components/Card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import type { PlaceDefinition } from "../dto/placeDefinitionDTO";
+import type { PlaceDefinition } from "../dto/Place/placeDefinitionDTO";
 
 export function LocalsSlider({name, places, color02 }: PlaceDefinition) {
 

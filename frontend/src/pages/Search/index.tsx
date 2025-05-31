@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 import { GetCityInfo } from "../../services/GetCity";
 
-import type { cityDataDTO } from "../../dto/cityDTO";
+import type { cityDataDTO } from "../../dto/City/cityDTO";
 import type { EventPlaceDTO } from "../../dto/Place/EventDef";
 
 export function Search() {

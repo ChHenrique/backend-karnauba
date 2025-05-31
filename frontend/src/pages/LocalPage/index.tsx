@@ -6,7 +6,7 @@ import { DescriptionSection } from "./Sections/description";
 import { SocialSection } from "./Sections/Social";
 import { Map } from "./Sections/Map";
 
-import type { cityDataDTO } from "../../dto/cityDTO";
+import type { cityDataDTO } from "../../dto/City/cityDTO";
 import { GetCityInfo } from "../../services/GetCity";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

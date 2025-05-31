@@ -1,5 +1,5 @@
 import { api } from "../lib/axios.config";
-import type { cityDataDTO } from "../dto/cityDTO";
+import type { cityDataDTO } from "../dto/City/cityDTO";
 
 export async function GetCityInfo(slug: string): Promise<cityDataDTO> {
 
