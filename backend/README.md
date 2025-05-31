@@ -30,10 +30,6 @@ Esta API permite que administradores possam cadastrar, editar e remover locais e
 ### 🗄️ Banco de Dados
 - [PostgreSQL](https://www.postgresql.org/)
 - [Prisma ORM](https://www.prisma.io/)
-- [Redis](https://redis.io/) — (Cache)
-
-### 🧪 Testes
-- [Vitest](https://vitest.dev/)
 
 ---
 
@@ -41,9 +37,10 @@ Esta API permite que administradores possam cadastrar, editar e remover locais e
 
 - 🔐 **Autenticação de administradores (JWT)**
 - 🗺️ **Gerenciamento de locais** (criar, editar, deletar e listar)
+- - 🗺️ **Gerenciamento de Cidades** (criar, editar, deletar e listar)
 - 📜 **Listagem pública de locais cadastrados**
-- 🏷️ **Gestão de categorias** (criar, editar, deletar e listar)
-- ⚡ **Cache com Redis para otimizar listagens públicas**
+
+
 
 ---
 
@@ -53,7 +50,6 @@ Esta API permite que administradores possam cadastrar, editar e remover locais e
 
 - [Node.js](https://nodejs.org/en/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [Redis](https://redis.io/) (opcional, para cache)
 - [Git](https://git-scm.com/)
 - [PNPM](https://pnpm.io/) (ou npm/yarn)
 
