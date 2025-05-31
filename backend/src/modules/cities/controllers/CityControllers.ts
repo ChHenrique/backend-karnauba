@@ -7,6 +7,7 @@ import { handleMultipart } from "../../../shared/middlewares/multipart";
 import { CityFindAllUseCase } from "../use-cases/CityFindAllUseCase";
 import { cityDTO } from "../dtos/cityDTO";
 import { CityFindPlacesEventsByIdUseCase } from "../use-cases/CityFindPlacesEventsByIdUseCase";
+import { CityFindBySlugUseCase } from "../use-cases/CityFindBySlugUseCase";
 
 export class CityControllers {
   constructor(
@@ -15,7 +16,8 @@ export class CityControllers {
     private findPlacesEventsUseCase: CityFindPlacesEventsByIdUseCase,
     private createUseCase: CityCreateUseCase,
     private updateUseCase: CityUpdateUseCase,
-    private deleteUseCase: CityDeleteUseCase
+    private deleteUseCase: CityDeleteUseCase,
+     private findBySlugUseCase: CityFindBySlugUseCase,
   ) {}
 
   async create(req: FastifyRequest, reply: FastifyReply) {
@@ -40,6 +42,12 @@ export class CityControllers {
   async findUnique(req: FastifyRequest, reply: FastifyReply) {
     const { id } = req.params as { id: string };
     const city = await this.findUniqueUseCase.execute(id);
+    reply.send(city);
+  }
+
+    async findBySlug(req: FastifyRequest, reply: FastifyReply) {
+    const { slug } = req.params as { slug: string };
+    const city = await this.findBySlugUseCase.execute(slug);
     reply.send(city);
   }
 

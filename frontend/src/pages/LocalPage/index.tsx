@@ -16,15 +16,16 @@ export function LocalPage() {
   const [city, setCity] = useState<cityDataDTO | null>(null);
   const [place, setPlace] = useState<cityDataDTO["places"][0] | null>(null);
 
-  useEffect(() => {
-    if (id && localId) {
-      GetCityInfo(id).then((data: cityDataDTO) => {
-        setCity(data);
-        const selectedPlace = data.places.find((place) => place.id === localId);
-        setPlace(selectedPlace || null);
-      });
-    }
-  });
+useEffect(() => {
+  if (id && localId) {
+    GetCityInfo(id).then((data: cityDataDTO) => {
+      setCity(data);
+      const selectedPlace = data.places.find((place) => place.id === localId);
+      setPlace(selectedPlace || null);
+    });
+  }
+}, [id, localId]);
+
 
   return (
     <div className="flex flex-col items-center w-screen h-fit bg-neutrals-100 relative">

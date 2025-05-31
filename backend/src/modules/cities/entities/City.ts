@@ -13,6 +13,7 @@ export class City {
         public color01: string | null,
         public color02: string | null,
         public readonly adminId: string,
+        public slug: string,                        
         public places: PlaceWithCityName[] = [],
         public events: EventWithCityName[] = []
     ) {}
@@ -27,6 +28,7 @@ export class City {
             data.color01,
             data.color02,
             data.adminId,
+            data.slug,                           
             (data.places || []).map((place: any) => {
                 const { city, ...rest } = place;
                 return {

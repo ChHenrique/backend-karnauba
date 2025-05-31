@@ -16,9 +16,11 @@ model City {
   color01     String?
   color02     String?
   createdAt   DateTime @default(now())
-  
-  admin       User     @relation("adminCity",fields: [adminId], references: [id])
-  adminId     String   @unique 
+
+  slug        String   @unique 
+
+  admin       User     @relation("adminCity", fields: [adminId], references: [id])
+  adminId     String   @unique
 
   places      Place[]
   events      Event[]

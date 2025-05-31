@@ -1,9 +1,9 @@
 import { api } from "../lib/axios.config";
 import type { cityDataDTO } from "../dto/cityDTO";
 
-export async function GetCityInfo(id: string): Promise<cityDataDTO> {
+export async function GetCityInfo(slug: string): Promise<cityDataDTO> {
 
-  const response = await api.get(`/cities/${id}`, { withCredentials: true });
+  const response = await api.get(`/cities-slug/${slug}`, { withCredentials: true });
   const city: cityDataDTO = {
     id: response.data.id,
     name: response.data.name,

@@ -1,6 +1,7 @@
 import { prisma } from '../../../config/prisma';
 import { City } from '../entities/City';
 import { CityRepository } from './CityRepository';
+import slugify from 'slugify';
 
 export class CityPrismaRepository implements CityRepository {
     async findAll(limit?: number): Promise<City[] | null> {
@@ -54,80 +55,97 @@ export class CityPrismaRepository implements CityRepository {
         return City.fromPrisma(cityData);
     }
 
-    async create(city: City): Promise<City> {
-        const created = await prisma.city.create({
-            data: {
-                name: city.name,
-                state: city.state,
-                description: city.description,
-                imageUrl: city.imageUrl ?? '',
-                adminId: city.adminId,
-                id: city.id,
-                color01: city.color01 ?? null,
-                color02: city.color02 ?? null
-            }
-        });
+      async findBySlug(slug: string): Promise<City | null> {
+    const cityData = await prisma.city.findUnique({
+      where: { slug },
+      include: {
+        places: {
+          include: {
+            city: { select: { name: true } }
+          }
+        },
+        events: {
+          include: {
+            city: { select: { name: true } }
+          }
+        }
+      }
+    });
 
-        const completeCity = await prisma.city.findUnique({
-            where: { id: created.id },
-            include: {
-                places: {
-                    include: {
-                        city: {
-                            select: { name: true }
-                        }
-                    }
-                },
-                events: {
-                    include: {
-                        city: {
-                            select: { name: true }
-                        }
-                    }
-                }
-            }
-        });
+    if (!cityData) return null;
 
-        return City.fromPrisma(completeCity);
+    return City.fromPrisma(cityData);
+  }
+
+  async create(city: City): Promise<City> {
+    const slug = slugify(`${city.name}-${city.state}`, { lower: true, strict: true });
+
+    const created = await prisma.city.create({
+      data: {
+        id: city.id,
+        name: city.name,
+        state: city.state,
+        description: city.description,
+        imageUrl: city.imageUrl ?? '',
+        adminId: city.adminId,
+        color01: city.color01 ?? null,
+        color02: city.color02 ?? null,
+        slug,  
+      }
+    });
+
+    const completeCity = await prisma.city.findUnique({
+      where: { id: created.id },
+      include: {
+        places: {
+          include: { city: { select: { name: true } } }
+        },
+        events: {
+          include: { city: { select: { name: true } } }
+        }
+      }
+    });
+
+    return City.fromPrisma(completeCity);
+  }
+
+  async update(id: string, data: Partial<City>): Promise<City> {
+    let slug;
+    if (data.name || data.state) {
+      const cityFromDb = await prisma.city.findUnique({ where: { id } });
+      if (!cityFromDb) throw new Error('City not found');
+
+      const name = data.name ?? cityFromDb.name;
+      const state = data.state ?? cityFromDb.state;
+
+      slug = slugify(`${name}-${state}`, { lower: true, strict: true });
     }
 
-    async update(id: string, data: Partial<City>): Promise<City> {
-        await prisma.city.update({
-            where: { id },
-            data: {
-                name: data.name,
-                state: data.state,
-                description: data.description,
-                imageUrl: data.imageUrl ?? undefined,
-                color01: data.color01 ?? undefined,
-                color02: data.color02 ?? undefined
-            }
-        });
+    await prisma.city.update({
+      where: { id },
+      data: {
+        name: data.name,
+        state: data.state,
+        description: data.description,
+        imageUrl: data.imageUrl ?? undefined,
+        color01: data.color01 ?? undefined,
+        color02: data.color02 ?? undefined,
+        slug,  
+      }
+    });
 
-        const updatedCity = await prisma.city.findUnique({
-            where: { id },
-            include: {
-                places: {
-                    include: {
-                        city: {
-                            select: { name: true }
-                        }
-                    }
-                },
-                events: {
-                    include: {
-                        city: {
-                            select: { name: true }
-                        }
-                    }
-                }
-            }
-        });
+    const updatedCity = await prisma.city.findUnique({
+      where: { id },
+      include: {
+        places: { include: { city: { select: { name: true } } } },
+        events: { include: { city: { select: { name: true } } } }
+      }
+    });
 
-        if (!updatedCity) throw new Error('City not found after update');
+    if (!updatedCity) throw new Error('City not found after update');
 
-        return City.fromPrisma(updatedCity);
-    }
+    return City.fromPrisma(updatedCity);
+  }
 
     async delete(id: string): Promise<void> {
         await prisma.city.delete({

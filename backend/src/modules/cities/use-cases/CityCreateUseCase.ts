@@ -4,8 +4,8 @@ import { randomUUID } from "crypto";
 import { CityRepository } from "../repositories/CityRepository";
 import { City } from "../entities/City";
 import { cityDTO } from "../dtos/cityDTO";
-
 import { parseImageInput } from "../../../shared/utils/parseImageInput";
+import slugify from "slugify";
 
 export class CityCreateUseCase {
   constructor(private readonly cityRepository: CityRepository) {}
@@ -32,6 +32,12 @@ export class CityCreateUseCase {
       color02 = null,
     } = validation.data;
 
+    const slug = slugify(`${name}-${state}`, {
+      lower: true,
+      strict: true,
+      trim: true,
+    });
+
     const city = new City(
       randomUUID(),
       name,
@@ -40,7 +46,8 @@ export class CityCreateUseCase {
       parseImageInput(imageUrl),
       color01,
       color02,
-      adminId
+      adminId,
+      slug 
     );
 
     await this.cityRepository.create(city);

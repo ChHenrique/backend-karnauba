@@ -3,6 +3,7 @@ import { CityControllers } from "../controllers/CityControllers";
 import { CityCreateUseCase } from "../use-cases/CityCreateUseCase";
 import { CityDeleteUseCase } from "../use-cases/CityDeleteUseCase";
 import { CityFindAllUseCase } from "../use-cases/CityFindAllUseCase";
+import { CityFindBySlugUseCase } from "../use-cases/CityFindBySlugUseCase";
 import { CityFindPlacesEventsByIdUseCase } from "../use-cases/CityFindPlacesEventsByIdUseCase";
 import { CityFindUniqueUseCase } from "../use-cases/CityFindUniqueUseCase";
 import { CityUpdateUseCase } from "../use-cases/CityUpdateUseCase";
@@ -14,6 +15,7 @@ const cityCreateUseCase = new CityCreateUseCase(cityPrismaRepository);
 const cityUpdateUseCase = new CityUpdateUseCase(cityPrismaRepository);
 const cityDeleteUseCase = new CityDeleteUseCase(cityPrismaRepository);
 const cityFindUniqueUseCase = new CityFindUniqueUseCase(cityPrismaRepository);
+const cityFindBySlugUseCase = new CityFindBySlugUseCase(cityPrismaRepository);
 const cityFindAllUseCase = new CityFindAllUseCase(cityPrismaRepository);
 const cityFindPlacesEventsUseCase = new CityFindPlacesEventsByIdUseCase(cityPrismaRepository)
 
@@ -23,5 +25,6 @@ export const cityInstance = new CityControllers(
     cityFindPlacesEventsUseCase,
     cityCreateUseCase,
     cityUpdateUseCase,
-    cityDeleteUseCase
+    cityDeleteUseCase,
+    cityFindBySlugUseCase
 );

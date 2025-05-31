@@ -12,6 +12,7 @@ export class CityRoutes {
       this.app.get('/cities-places-events/:id', (req, res) => cityInstance.findPlacesEventById(req, res))
       this.app.get('/cities', (req, res) => cityInstance.findAll(req, res));
       this.app.get('/cities/:id', (req, res) => cityInstance.findUnique(req, res));
+      this.app.get('/cities-slug/:slug', (req, res) => cityInstance.findBySlug(req, res));
 
     this.app.register((app) => {
       app.addHook('preHandler', verifyJWT);
