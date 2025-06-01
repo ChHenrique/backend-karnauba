@@ -11,6 +11,4 @@ export type EventDTO = {
   startDate: string;
   endDate: string;
   adress?: string;
-  instagram?: string;
-  whatsapp?: string;
 }

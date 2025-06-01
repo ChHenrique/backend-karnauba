@@ -10,11 +10,25 @@ export function ModalEventUpdate({
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  eventData: EventDTO;
+ eventData: {
+    id: string;
+    name: string;
+    description: string;
+    imageUrl: string;
+    category: string;
+    city: string;
+    latitude?: number;
+    longitude?: number;
+    adress?: string;
+    startDate?: string;
+    endDate?: string;
+  };
 }) {
+ const {id, name, description, imageUrl, category, city, latitude, longitude, adress, startDate, endDate} = eventData;
+
  const [event, setEvent] = useState<EventDTO>({
-  id: eventData?.id ?? "",
-  name: eventData?.name ?? "",
+  id: id ?? "",
+  name:  name ?? "",
   description: eventData?.description ?? "",
   imageUrl: eventData?.imageUrl ?? "",
   category: eventData?.category ?? "",
@@ -25,6 +39,7 @@ export function ModalEventUpdate({
   startDate: eventData?.startDate ?? "",
   endDate: eventData?.endDate ?? "",
 });
+
 
 
   const [image, setImage] = useState<File | null>(null);

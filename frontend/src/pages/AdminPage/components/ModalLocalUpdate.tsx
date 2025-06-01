@@ -8,7 +8,19 @@ export function ModalLocalUpdate({
   setOpen,
   place,
 }: {
-  place: PlaceDTO;
+  place: {
+    id: string;
+    name: string;
+    description: string;
+    imageUrl?: string;
+    category: string;
+    city: string;
+    latitude?: number;
+    longitude?: number;
+    adress?: string;
+    instagram?: string;
+    whatsapp?: string;
+  };
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
