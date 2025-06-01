@@ -74,8 +74,8 @@ export function Card({
         >
           <div className="w-full z-20 absolute bottom-0 px-4 gap-4 justify-end flex items-center">
             <button
-              onClick={() => {
-                setUpdate(true);
+              onClick={(e) => {
+                
                 setLocals({
                   id: place?.id,
                   name: place?.name,
@@ -89,6 +89,9 @@ export function Card({
                   instagram: place?.instagram,
                   whatsapp: place?.whatsapp,
                 });
+             
+                setUpdate(true);
+
               }}
               className="h-8 w-8 rounded-lg bg-white cursor-pointer hover:scale-105"
             >

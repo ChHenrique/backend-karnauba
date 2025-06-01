@@ -8,11 +8,12 @@ import { ModalLocalUpdate } from "../components/ModalLocalUpdate";
 import { useState } from "react";
 import { ModalLocalCreate } from "../components/ModalLocalCreate";
 
-export function LocalsSection() {
+export function LocalsSection({ allPlaces }: any) {
   const [openUpdate, setOpenUpdate] = useState(false);
-  const [openCreate, setOpenCreate] = useState(true);
+  const [openCreate, setOpenCreate] = useState(false);
 
-  const [local, setLocal] = useState<PlaceDTO>({
+
+  const [local, setLocal] = useState({
     id: "",
     name: "",
     description: "",
@@ -38,9 +39,10 @@ export function LocalsSection() {
       </div>
 
       <ModalLocalUpdate
+        place={local}
         open={openUpdate}
         setOpen={setOpenUpdate}
-         placeData={local}
+
 
       ></ModalLocalUpdate>
       <ModalLocalCreate
@@ -49,7 +51,8 @@ export function LocalsSection() {
       ></ModalLocalCreate>
 
       <div className="w-full h-full p-4 grid place items-baseline grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2  overflow-y-auto overflow-x-hidden">
- <Card
+        {allPlaces.map((place: PlaceDTO) => (
+        <Card
           place={{
             id: "1",
             name: "Local 01",
@@ -66,25 +69,8 @@ export function LocalsSection() {
           color02="#E8C9FF"
           setUpdate={setOpenUpdate}
           setLocals={setLocal}
-        />
-        <Card
-          place={{
-            id: "2",
-            name: "Local 02",
-            description: "",
-            imageUrl: "/images/locals/1.png",
-            category: "",
-            city: "São Paulo",
-            latitude: -23.5505,
-            longitude: -46.6333,
-            adress: "Avenida Paulista, 1578",
-            instagram: "",
-            whatsapp: ""
-          }}
-          color02="#E8C9FF"
-          setUpdate={setOpenUpdate}
-          setLocals={setLocal}
-        />
+        />)}
+
       </div>
     </div>
   );

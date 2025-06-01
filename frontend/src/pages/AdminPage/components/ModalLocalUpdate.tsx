@@ -38,8 +38,7 @@ export function ModalLocalUpdate({
     whatsapp: place?.whatsapp ?? "",
   });
 
-  console.log("Local:", local);
-  console.log("Place:", place);
+  console.log("Local:", place);
 
   const [image, setImage] = useState<File | null>(null);
 
@@ -98,7 +97,7 @@ export function ModalLocalUpdate({
             <input
               type="text"
               id="name"
-              placeholder={local.name}
+              placeholder={place.name}
               onChange={(e) => setLocal({ ...local, name: e.target.value })}
               className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
             />
@@ -110,7 +109,7 @@ export function ModalLocalUpdate({
                 setLocal((prev) => ({ ...prev, category: e.target.value }))
               }
               className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
-              value={local.category}
+              value={place.category}
             >
               <option value="">Selecione uma categoria</option>
               <option value="GASTRONOMIA">GASTRONOMIA</option>
@@ -126,7 +125,7 @@ export function ModalLocalUpdate({
             </label>
             <textarea
               id="description"
-              placeholder={local.description}
+              placeholder={place.description}
               onChange={(e) =>
                 setLocal((prev) => ({ ...prev, description: e.target.value }))
               }
@@ -144,7 +143,7 @@ export function ModalLocalUpdate({
               <input
                 type="text"
                 id="instagram"
-                placeholder={local.instagram || "https://instagram.com/..."}
+                placeholder={place.instagram || "https://instagram.com/..."}
                 onChange={(e) =>
                   setLocal((prev) => ({ ...prev, instagram: e.target.value }))
                 }
@@ -155,7 +154,7 @@ export function ModalLocalUpdate({
               <input
                 type="text"
                 id="whatsapp"
-                placeholder={local.whatsapp || "88 9 96913-4510"}
+                placeholder={place.whatsapp || "88 9 96913-4510"}
                 onChange={(e) =>
                   setLocal((prev) => ({ ...prev, whatsapp: e.target.value }))
                 }
@@ -167,7 +166,7 @@ export function ModalLocalUpdate({
                 <input
                   type="text"
                   id="latitude"
-                  placeholder={String(local.latitude)}
+                  placeholder={String(place.latitude)}
                   onChange={(e) => {
                     if (!isNaN(Number(e.target.value))) {
                       setLocal((prev) => ({
@@ -181,7 +180,7 @@ export function ModalLocalUpdate({
                 <input
                   type="text"
                   id="longitude"
-                  placeholder={String(local.longitude)}
+                  placeholder={String(place.longitude)}
                   onChange={(e) => {
                     if (!isNaN(Number(e.target.value))) {
                       setLocal((prev) => ({
@@ -197,7 +196,7 @@ export function ModalLocalUpdate({
               <input
                 type="text"
                 id="adress"
-                placeholder={local.adress}
+                placeholder={place.adress}
                 onChange={(e) =>
                   setLocal((prev) => ({ ...prev, adress: e.target.value }))
                 }
@@ -205,8 +204,8 @@ export function ModalLocalUpdate({
               />
 
               <Map
-                position={[local.latitude, local.longitude]}
-                adress={local.adress}
+                position={[place.latitude, place.longitude]}
+                adress={place.adress}
               />
             </div>
           </div>

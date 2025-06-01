@@ -2,11 +2,30 @@ import { SideBar } from "./sections/SideBar"
 import { CitySection } from "./sections/CitySection";
 import { LocalsSection } from "./sections/locals";
 
+import { GetAllPlaces } from "./services/GetAllPlaces";
 
-import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useState,useEffect } from "react";
 import { EventsSection } from "./sections/events";
 
 export function AdminPage() {
+ const { id } = useParams();
+
+
+    const [places, setPlaces] = useState([]);
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        try {
+            const response = await GetAll();
+            setPlaces(response.data.places);
+            setEvents(response.data.events);
+        }catch (error) {
+            console.error("Error fetching places:", error);
+        }
+
+
+    }, []);
 
     const [page, setPage] = useState(0);
 
@@ -15,7 +34,7 @@ export function AdminPage() {
             case 0:
                 return <CitySection />;
             case 1:
-                return <LocalsSection />;
+                return <LocalsSection  />;
             case 2:
                 return <EventsSection/>;
             default:

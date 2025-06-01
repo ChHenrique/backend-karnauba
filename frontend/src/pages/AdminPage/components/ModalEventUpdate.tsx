@@ -81,7 +81,7 @@ export function ModalEventUpdate({
               htmlFor="img"
               className="h-full aspect-video bg-primary-200 rounded-3xl cursor-pointer"
               style={{
-                backgroundImage: `url(${event.imageUrl || "https://cupix.com.br/assets/img/cupix-logo.png"})`,
+                backgroundImage: `url(${eventData.imageUrl || "https://cupix.com.br/assets/img/cupix-logo.png"})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -98,28 +98,17 @@ export function ModalEventUpdate({
             <input
               type="text"
               id="name"
-              value={event.name}
+              value={eventData.name}
               onChange={(e) => setEvent({ ...event, name: e.target.value })}
               className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
             />
 
-            <label htmlFor="category">Categoria</label>
-            <select
-              id="category"
-              value={event.category}
-              onChange={(e) => setEvent({ ...event, category: e.target.value })}
-              className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
-            >
-              <option value="">Selecione uma categoria</option>
-              <option value="SHOW">SHOW</option>
-              <option value="FEIRA">FEIRA</option>
-              <option value="CULTURAL">CULTURAL</option>
-            </select>
+            
 
             <label htmlFor="description">Descrição</label>
             <textarea
               id="description"
-              value={event.description}
+              value={eventData.description}
               onChange={(e) => setEvent({ ...event, description: e.target.value })}
               className="w-full min-h-28 border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
             />
@@ -128,7 +117,7 @@ export function ModalEventUpdate({
             <input
               type="date"
               id="startDate"
-              value={event.startDate.toString().split("T")[0]}
+              value={eventData.startDate.toString().split("T")[0]}
               onChange={(e) => setEvent({ ...event, startDate: new Date(e.target.value) })}
               className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
             />
@@ -137,7 +126,7 @@ export function ModalEventUpdate({
             <input
               type="date"
               id="endDate"
-              value={event.endDate.toString().split("T")[0]}
+              value={eventData.endDate.toString().split("T")[0]}
               onChange={(e) => setEvent({ ...event, endDate: new Date(e.target.value) })}
               className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
             />
@@ -147,7 +136,7 @@ export function ModalEventUpdate({
               <input
                 type="text"
                 id="latitude"
-                value={event.latitude.toString()}
+                value={eventData.latitude.toString()}
                 onChange={(e) => {
                   const value = Number(e.target.value);
                   if (!isNaN(value)) setEvent({ ...event, latitude: value });
@@ -157,7 +146,7 @@ export function ModalEventUpdate({
               <input
                 type="text"
                 id="longitude"
-                value={event.longitude.toString()}
+                value={eventData.longitude.toString()}
                 onChange={(e) => {
                   const value = Number(e.target.value);
                   if (!isNaN(value)) setEvent({ ...event, longitude: value });
@@ -169,12 +158,12 @@ export function ModalEventUpdate({
             <input
               type="text"
               id="adress"
-              value={event.adress}
+              value={eventData.adress}
               onChange={(e) => setEvent({ ...event, adress: e.target.value })}
               className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
             />
 
-            <Map position={[event.latitude, event.longitude]} adress={event.adress} />
+            <Map position={[eventData.latitude, eventData.longitude]} adress={eventData.adress} />
           </div>
         </div>
 

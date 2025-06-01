@@ -7,9 +7,9 @@ import { ModalEventUpdate } from "../components/ModalEventUpdate";
 
 export function EventsSection() {
   const [openEventUpdate, setOpenEventUpdate] = useState(false);
-  const [openEventCreate, setOpenEventCreate] = useState(true);
+  const [openEventCreate, setOpenEventCreate] = useState(false);
 
-  const [event, setEvent] = useState<EventDTO>({
+  const [event, setEvent] = useState({
     id: "",
     name: "",
     description: "",
@@ -35,9 +35,10 @@ export function EventsSection() {
       </div>
 
       <ModalEventUpdate
+        eventData={event}
         open={openEventUpdate}
         setOpen={setOpenEventUpdate}
-        eventData={event}
+        
       />
       <ModalEventCreate open={openEventCreate} setOpen={setOpenEventCreate} />
 

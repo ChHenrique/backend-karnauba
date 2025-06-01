@@ -75,7 +75,6 @@ export function Card({
           <div className="w-full z-20 absolute bottom-0 px-4 gap-4 justify-end flex items-center">
             <button
               onClick={() => {
-                setUpdate(true);
                 setEvent({
                   id: event?.id,
                   name: event?.name,
@@ -87,8 +86,11 @@ export function Card({
                   startDate: event?.startDate,
                   endDate: event?.endDate,
                   latitude: event?.latitude,
-                  longitude: event?.longitude,
-                });
+                  longitude: event?.longitude,}
+                )
+                setUpdate(true);
+                
+
               }}
               className="h-8 w-8 rounded-lg bg-white cursor-pointer hover:scale-105"
             >
