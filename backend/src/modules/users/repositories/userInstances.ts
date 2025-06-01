@@ -1,7 +1,9 @@
 import { UserControllers } from "../controllers/UserControllers";
+import { PasswordResetUseCases } from "../use-cases/PasswordResetUseCases";
 
 import { UserCreateUseCase } from "../use-cases/UserCreateUseCase";
 import { UserDeleteUseCase } from "../use-cases/UserDeleteUseCase";
+import { UserFindByEmailUseCase } from "../use-cases/UserFindByEmailUseCase";
 import { UserFindManyUseCase } from "../use-cases/UserFindManyUseCase";
 import { UserFindUniqueUseCase } from "../use-cases/UserFindUniqueUseCase";
 import { UserLoginUseCase } from "../use-cases/UserLoginUseCase";
@@ -16,6 +18,8 @@ const userDeleteUseCase = new UserDeleteUseCase(userPrismaRepository);
 const userFindUniqueUseCase = new UserFindUniqueUseCase(userPrismaRepository);
 const userFindManyUseCase = new UserFindManyUseCase(userPrismaRepository);
 const userLoginUseCase = new UserLoginUseCase(userPrismaRepository);
+const userPasswordResetUseCases = new PasswordResetUseCases(userPrismaRepository);
+const userFindByEmailUseCase = new UserFindByEmailUseCase(userPrismaRepository);
 
 export const userInstance = new UserControllers(
     userFindUniqueUseCase,
@@ -23,5 +27,7 @@ export const userInstance = new UserControllers(
     userCreateUseCase,
     userUpdateUseCase,
     userDeleteUseCase,
-    userLoginUseCase
+    userLoginUseCase,
+    userPasswordResetUseCases,
+    userFindByEmailUseCase
 );

@@ -7,12 +7,15 @@ import { Place } from "../entities/Place";
 import { Category } from "@prisma/client";
 import { parseImageInput } from "../../../shared/utils/parseImageInput";
 import { normalizePlaceInput } from "../utils/normalizePlaceInput";
+import { CityRepository } from "../../cities/repositories/CityRepository";
 
 export class PlaceCreateUseCase {
-  constructor(private placeRepository: PlaceRepository) {}
+  constructor(
+    private placeRepository: PlaceRepository,
+    private cityRepository: CityRepository // 👉 necessário para verificar o admin da cidade
+  ) {}
 
-
-  async execute(data: any): Promise<Place> {
+  async execute(data: any, userId: string): Promise<Place> {
     const normalizedData = normalizePlaceInput(data);
 
     const parsedData = placeSchema.safeParse(normalizedData);
@@ -39,9 +42,21 @@ export class PlaceCreateUseCase {
       whatsapp,
     } = parsedData.data;
 
+    const city = await this.cityRepository.findUnique(cityId);
+
+    if (!city) {
+      throw new ServerError("City not found", 404);
+    }
+
+    if (city.adminId !== userId) {
+      throw new ServerError(
+        "You are not authorized to create a place in this city",
+        403
+      );
+    }
+
     const id = randomUUID();
     const categoryEnum = Category[category as keyof typeof Category];
-
     const parsedImage = parseImageInput(imageUrl) ?? "";
 
     const place = new Place(
