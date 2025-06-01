@@ -24,11 +24,10 @@ export function ModalEventUpdate({
     endDate?: string;
   };
 }) {
- const {id, name, description, imageUrl, category, city, latitude, longitude, adress, startDate, endDate} = eventData;
 
  const [event, setEvent] = useState<EventDTO>({
-  id: id ?? "",
-  name:  name ?? "",
+  id: eventData?.id ?? "",
+  name:  eventData?.name ?? "",
   description: eventData?.description ?? "",
   imageUrl: eventData?.imageUrl ?? "",
   category: eventData?.category ?? "",

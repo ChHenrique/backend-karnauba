@@ -38,6 +38,9 @@ export function ModalLocalUpdate({
     whatsapp: place?.whatsapp ?? "",
   });
 
+  console.log("Local:", local);
+  console.log("Place:", place);
+
   const [image, setImage] = useState<File | null>(null);
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
