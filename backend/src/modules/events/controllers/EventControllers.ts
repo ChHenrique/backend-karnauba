@@ -19,20 +19,23 @@ export class EventController {
 
     async create(req: FastifyRequest, reply: FastifyReply) {
         const eventData = await handleMultipart(req, "events") as eventDTO;
-        const event = await this.createUseCase.execute(eventData);
+        const userId = (req as any).user.id;
+        const event = await this.createUseCase.execute(eventData, userId);
         reply.status(201).send({ message: "Event created successfully", ...event });
     }
 
     async update(req: FastifyRequest, reply: FastifyReply) {
         const { id } = req.params as { id: string };
+         const userId = (req as any).user.id;
         const eventData = await handleMultipart(req, "events") as Partial<eventDTO>;
-        const updatedEvent = await this.updateUseCase.execute(id, eventData);
+        const updatedEvent = await this.updateUseCase.execute(id, eventData, userId);
         reply.send({ message: "Event updated successfully", ...updatedEvent });
     }
 
     async delete(req: FastifyRequest, reply: FastifyReply) {
         const { id } = req.params as { id: string };
-        await this.deleteUseCase.execute(id);
+        const userId = (req as any).user.id;
+        await this.deleteUseCase.execute(id, userId);
         reply.send({ message: "Event deleted successfully" });
     }
 

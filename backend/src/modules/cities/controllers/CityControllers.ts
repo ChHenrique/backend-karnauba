@@ -3,6 +3,8 @@ import { CityDeleteUseCase } from "../use-cases/CityDeleteUseCase";
 import { CityFindUniqueUseCase } from "../use-cases/CityFindUniqueUseCase";
 import { CityUpdateUseCase } from "../use-cases/CityUpdateUseCase";
 import { FastifyReply, FastifyRequest } from "fastify";
+
+
 import { handleMultipart } from "../../../shared/middlewares/multipart";
 import { CityFindAllUseCase } from "../use-cases/CityFindAllUseCase";
 import { cityDTO } from "../dtos/cityDTO";
@@ -26,16 +28,24 @@ export class CityControllers {
     reply.status(201).send({ message: "City created successfully", ...city });
   }
 
-  async update(req: FastifyRequest, reply: FastifyReply) {
+async update(req: FastifyRequest, reply: FastifyReply) {
     const { id } = req.params as { id: string };
     const cityData = (await handleMultipart(req, "cities")) as cityDTO;
-    const updatedCity = await this.updateUseCase.execute(id, cityData);
-    reply.send({ message: "City updated successfully", ...updatedCity });
-  }
+    const userId = (req as any).user.id;
+
+    const updatedCity = await this.updateUseCase.execute(id, cityData, userId);
+
+    reply.send({ 
+        message: "City updated successfully", 
+        ...updatedCity 
+    });
+}
+
 
   async delete(req: FastifyRequest, reply: FastifyReply) {
     const { id } = req.params as { id: string };
-    await this.deleteUseCase.execute(id);
+    const userId = (req as any).user.id;
+    await this.deleteUseCase.execute(id, userId);
     reply.send({ message: "City deleted" });
   }
 
