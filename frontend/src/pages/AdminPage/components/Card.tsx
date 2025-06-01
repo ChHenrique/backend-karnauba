@@ -1,29 +1,36 @@
+import Edit from "../../../assets/edit.svg";
+import Trash from "../../../assets/trash.svg";
+
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
 
 export function Card({
   imageUrl,
   name,
+  adress,
+  latitude,
+  longitude,
   city,
   startDate,
   endDate,
   color02,
   id,
+  setUpdate = () => {},
 }: {
   imageUrl: string;
   city: string;
   name: string;
+  setUpdate?: (value: boolean) => void;
+
+  adress?: string;
+  latitude?: number;
+  longitude?: number;
   startDate?: string;
   endDate?: string;
   color02?: string;
   id?: string;
 }) {
-  const citySlug =
-    typeof city === "string"
-      ? city.toLowerCase().replace(/\s+/g, "-")
-      : "cidade-desconhecida";
   const cardRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+
   const handleMouseMove = (e: React.MouseEvent) => {
     const card = cardRef.current;
     if (!card) return;
@@ -49,10 +56,7 @@ export function Card({
   };
 
   return (
-    <div
-      onClick={() => navigate(`/city/${citySlug}-ce/local/${id}`)}
-      className="h-72 items-start cursor-pointer w-50 max-md:w-36 flex flex-col text-neutrals-200 justify-start overflow-hidden relative"
-    >
+    <div className="h-72 items-start w-50 max-md:w-36 flex flex-col text-neutrals-200 justify-start overflow-hidden relative">
       <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
@@ -69,7 +73,16 @@ export function Card({
             backgroundRepeat: "no-repeat",
           }}
         >
-          <div className="h-full z-10 hover:bg-gray-100/15 absolute duration-200  w-full "></div>
+          {" "}
+          <div className="w-full z-20 absolute bottom-0 px-4 gap-4 justify-end flex items-center">
+            <button className="h-8 w-8 rounded-lg bg-white cursor-pointer hover:scale-105 ">
+              <img src={Edit} alt="" />
+            </button>
+            <button className="h-8 w-8 rounded-lg bg-primary-300 cursor-pointer hover:scale-105">
+              <img src={Trash} alt="" />
+            </button>
+          </div>
+          <div className="h-full z-10 absolute duration-200  w-full "></div>
         </div>
       </div>
 

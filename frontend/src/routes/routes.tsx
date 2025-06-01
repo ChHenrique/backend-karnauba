@@ -28,7 +28,7 @@ export const routes = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: '/city/admin',
+        path: '/city-adm/:id',
         element: <AdminPage />,
       }
     ],
