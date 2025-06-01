@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: cactour-backend
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/cactour"
+      REDIS_URL: "redis://redis:6379"
+      JWT_SECRET: "segredo_jwt_aqui"
+      MAILER_USER: "seuemail@gmail.com"
+      MAILER_PASSWORD: "senha_aqui"
+    depends_on:
+      - redis
+      - postgres
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: cactour-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres
+    container_name: cactour-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cactour
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  redis:
+    image: redis
+    container_name: cactour-redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+volumes:
+  postgres_data:
