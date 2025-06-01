@@ -2,7 +2,7 @@ import { SideBar } from "./sections/SideBar"
 import { CitySection } from "./sections/CitySection";
 import { LocalsSection } from "./sections/locals";
 
-import { GetAllPlaces } from "./services/GetAllPlaces";
+import { GetAll } from "./services/GetAllEventsPlaces";
 
 import { useParams } from "react-router-dom";
 import { useState,useEffect } from "react";
@@ -16,13 +16,15 @@ export function AdminPage() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
+        async function Gets(){
         try {
             const response = await GetAll();
             setPlaces(response.data.places);
             setEvents(response.data.events);
         }catch (error) {
             console.error("Error fetching places:", error);
-        }
+        }}
+        Gets();
 
 
     }, []);
