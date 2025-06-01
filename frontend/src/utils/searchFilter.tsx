@@ -27,3 +27,4 @@ export function Filter({ search, categories, places }: FilterProps) {
   });
   return filteredPlaces;
 }
+

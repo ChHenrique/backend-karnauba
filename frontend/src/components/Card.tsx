@@ -8,6 +8,7 @@ export function Card({
   startDate,
   endDate,
   color02,
+  id,
 }: {
   imageUrl: string;
   city: string;
@@ -15,16 +16,16 @@ export function Card({
   startDate?: string;
   endDate?: string;
   color02?: string;
+  id?: string;
 }) {
-  const cidade = "Santana do Acarau";
-  const citySlug = cidade.toLowerCase().replace(/\s+/g, '-');
+  const citySlug = city.toLowerCase().replace(/\s+/g, '-');
   
    const cardRef = useRef<HTMLDivElement>(null);
    const navigate = useNavigate();
   const handleMouseMove = (e: React.MouseEvent) => {
     const card = cardRef.current;
     if (!card) return;
-    console.log(citySlug)
+  console.log(id)
 
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -47,7 +48,7 @@ export function Card({
 
 
   return (
-    <div onClick={() => navigate(`/city/${citySlug}-ce/local/${name}`)} className="h-72 items-start cursor-pointer w-fit flex flex-col text-neutrals-200 justify-start overflow-hidden relative">
+    <div onClick={() => navigate(`/city/${citySlug}-ce/local/${id}`)} className="h-72 items-start cursor-pointer w-50 max-md:w-36 flex flex-col text-neutrals-200 justify-start overflow-hidden relative">
       <div 
       ref={cardRef}
       onMouseMove={handleMouseMove}

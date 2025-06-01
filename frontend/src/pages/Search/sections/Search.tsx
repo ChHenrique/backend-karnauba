@@ -91,6 +91,7 @@ export function SearchSection({PlacesEvents, color02}: Params) {
             startDate={place.startDate}
             endDate={place.endDate}
             color02={color02}
+            id={place.id}
           />
         ))}
       </div>

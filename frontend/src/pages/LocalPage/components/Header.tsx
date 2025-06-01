@@ -29,6 +29,7 @@ export function Header({ cityName, FirstColor }: Props) {
     >
       <div className="w-full h-14 flex justify-between items-center px-4 bg-neutrals-100">
       <img src={LogoBright} alt="" className="scale-75" />
+      <a href="/" className="font-roboto-100 font-bold mr-10">Inicio</a>
 
 
       </div>

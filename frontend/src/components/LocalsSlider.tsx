@@ -50,6 +50,7 @@ export function LocalsSlider({name, places, color02 }: PlaceDefinition) {
                   imageUrl={places.imageUrl}
                   name={places.name}
                   city={places.cityName}
+                  id={places.id}
                   color02={color02 || "#F1DEFE"} // Default color if not provided
                 />
               </SwiperSlide>
