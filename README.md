@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="Logo da Cactour" width="200"/>
+  <img src="assets/logo.jpg" alt="Logo da Cactour" width="200"/>
 </p>
 
 # Cactour - Sistema de Gerenciamento de Pontos Turísticos 🌵
