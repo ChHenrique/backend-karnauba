@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/logo.jpg" alt="Logo da Cactour" width="200"/>
+  <img src="assets/logo.png" alt="Logo da Cactour" width="200"/>
 </p>
 
-# Cactour - Sistema de Gerenciamento de Pontos Turísticos 🌵
+ # Cactour - Sistema de Gerenciamento de Pontos Turísticos 
 
 Cactour é um sistema desenvolvido para o processo seletivo de estágio da Karnauba Software. O sistema é focado no gerenciamento de pontos turísticos de várias cidades, permitindo a criação e organização de cidades, locais (places) e eventos, com categorização por tipo, como gastronomia, paisagens, entre outros.
 
