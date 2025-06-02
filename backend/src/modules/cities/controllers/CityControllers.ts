@@ -29,16 +29,15 @@ export class CityControllers {
   }
 
 async update(req: FastifyRequest, reply: FastifyReply) {
-    const { id } = req.params as { id: string };
-    const cityData = (await handleMultipart(req, "cities")) as cityDTO;
-    const userId = (req as any).user.id;
+  const { id } = req.params as { id: string };
+  const cityData = (await handleMultipart(req, "cities")) as cityDTO;
 
-    const updatedCity = await this.updateUseCase.execute(id, cityData, userId);
+  const updatedCity = await this.updateUseCase.execute(id, cityData);
 
-    reply.send({ 
-        message: "City updated successfully", 
-        ...updatedCity 
-    });
+  reply.send({ 
+    message: "City updated successfully", 
+    ...updatedCity 
+  });
 }
 
 

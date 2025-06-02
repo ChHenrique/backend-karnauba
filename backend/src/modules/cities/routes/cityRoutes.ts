@@ -13,13 +13,14 @@ export class CityRoutes {
       this.app.get('/cities', (req, res) => cityInstance.findAll(req, res));
       this.app.get('/cities/:id', (req, res) => cityInstance.findUnique(req, res));
       this.app.get('/cities-slug/:slug', (req, res) => cityInstance.findBySlug(req, res));
+            this.app.put('/cities/:id', (req, res) => cityInstance.update(req, res));
 
     this.app.register((app) => {
       app.addHook('preHandler', verifyJWT);
       app.addHook('preHandler', verifyAdmin);
 
       app.post('/cities', (req, res) => cityInstance.create(req, res))
-      app.put('/cities/:id', (req, res) => cityInstance.update(req, res));
+
       app.delete('/cities/:id', (req, res) => cityInstance.delete(req, res));
     });
   }

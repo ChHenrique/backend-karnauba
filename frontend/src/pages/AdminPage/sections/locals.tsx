@@ -51,25 +51,26 @@ export function LocalsSection({ allPlaces }: any) {
       ></ModalLocalCreate>
 
       <div className="w-full h-full p-4 grid place items-baseline grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2  overflow-y-auto overflow-x-hidden">
-        {allPlaces.map((place: PlaceDTO) => (
+        {allPlaces.map((place) => (
         <Card
           place={{
-            id: "1",
-            name: "Local 01",
-            description: "",
-            imageUrl: "/images/locals/1.png",
-            category: "",
-            city: "São Paulo",
-            latitude: -23.5505,
-            longitude: -46.6333,
-            adress: "Avenida Paulista, 1578",
-            instagram: "",
-            whatsapp: ""
+            id: place.id,
+            name: place.name,
+            description: place.description,
+            imageUrl: place.imageUrl,
+            category: place.category,
+            city: place.city,
+            latitude: place.latitude,
+            longitude: place.longitude,
+            adress: place.adress,
+            instagram: place.instagram,
+            whatsapp: place.whatsapp,
           }}
-          color02="#E8C9FF"
+          color02={place.color02}
+          key={place.id}
           setUpdate={setOpenUpdate}
           setLocals={setLocal}
-        />)}
+        />))}
 
       </div>
     </div>
