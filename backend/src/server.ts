@@ -34,7 +34,7 @@ new EventRoutes(fastify).registerRoutes();
 new PlaceRoutes(fastify).registerRoutes()
 new ImageRoutes(fastify).registerRoutes();
 
-fastify.listen({ port: 3000 })
+fastify.listen({ port: 3000, host: '0.0.0.0' })
   .then(() => {
     console.log("Server running: http://localhost:3000");
   })
@@ -42,3 +42,4 @@ fastify.listen({ port: 3000 })
     console.error(err);
     process.exit(1);
   });
+

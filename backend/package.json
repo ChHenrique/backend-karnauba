@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
-  "scripts": {
-    "dev": "tsx --watch src/server.ts"
-  },
+"scripts": {
+  "dev": "tsx --watch src/server.ts",
+  "prisma:migrate:dev": "prisma migrate dev --name init"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -39,6 +41,7 @@
     "@types/cors": "^2.8.18",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.22",
+    "@types/nodemailer": "^6.4.17",
     "prisma": "^6.8.2",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"

@@ -1,3 +1,4 @@
 import Redis from 'ioredis';
 
-export const redis = new Redis(); 
+const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379'; // fallback fora do Docker
+export const redis = new Redis(redisUrl);
