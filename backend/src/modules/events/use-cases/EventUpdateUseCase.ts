@@ -12,7 +12,7 @@ export class EventUpdateUseCase {
         private cityRepository: CityRepository // injetar city repo
     ) {}
 
-    async execute(id: string, data: Partial<eventDTO>, userId: string): Promise<Event> {
+    async execute(id: string, data: Partial<eventDTO>): Promise<Event> {
         const event = await this.eventRepository.findUnique(id);
 
         if (!event) {
@@ -25,13 +25,6 @@ export class EventUpdateUseCase {
             throw new ServerError("City not found", 404);
         }
 
-        // Verificar se o usuário é admin da cidade
-        if (city.adminId !== userId) {
-            throw new ServerError(
-                "You are not authorized to update this event",
-                403
-            );
-        }
 
         const validation = eventUpdateSchema.safeParse(data);
 
@@ -46,19 +39,6 @@ export class EventUpdateUseCase {
 
         const validData = validation.data;
 
-        // Se for tentar mudar a cityId, verifica se o user é admin da nova cidade também
-        if (validData.cityId && validData.cityId !== event.cityId) {
-            const newCity = await this.cityRepository.findUnique(validData.cityId);
-            if (!newCity) {
-                throw new ServerError("New city not found", 404);
-            }
-            if (newCity.adminId !== userId) {
-                throw new ServerError(
-                    "You are not authorized to move the event to this city",
-                    403
-                );
-            }
-        }
 
         const updatedEvent = new Event(
             event.id,

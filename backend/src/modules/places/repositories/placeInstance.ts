@@ -9,7 +9,7 @@ import { CityPrismaRepository } from "../../cities/repositories/CityPrismaReposi
 
 
 const placePrismaRepository = new PlacePrismaRepository();
-const cityPrismaRepository = new CityPrismaRepository()// Assuming cityRepository is available in PlacePrismaRepository
+const cityPrismaRepository = new CityPrismaRepository()
 
 const placeCreateUseCase = new PlaceCreateUseCase(placePrismaRepository, cityPrismaRepository);
 const placeUpdateUseCase = new PlaceUpdateUseCase(placePrismaRepository, cityPrismaRepository);

@@ -43,8 +43,8 @@ async update(req: FastifyRequest, reply: FastifyReply) {
 
   async delete(req: FastifyRequest, reply: FastifyReply) {
     const { id } = req.params as { id: string };
-    const userId = (req as any).user.id;
-    await this.deleteUseCase.execute(id, userId);
+
+    await this.deleteUseCase.execute(id);
     reply.send({ message: "City deleted" });
   }
 

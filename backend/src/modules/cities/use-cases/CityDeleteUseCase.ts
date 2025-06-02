@@ -6,14 +6,10 @@ export class CityDeleteUseCase {
         private cityRepository: CityRepository,
     ) {}
 
-    async execute(id: string, userId: string): Promise<void> {
+    async execute(id: string): Promise<void> {
         const city = await this.cityRepository.findUnique(id);
 
         if (!city) throw new ServerError("City not found", 404);
-
-        if (city.adminId !== userId) {
-            throw new ServerError("You are not authorized to delete this city", 403);
-        }
 
         const relations = await this.cityRepository.findPlacesAndEventsById(id);
 
