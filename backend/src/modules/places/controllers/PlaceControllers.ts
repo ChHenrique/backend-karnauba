@@ -18,23 +18,23 @@ export class PlaceControllers {
 
     async create(req: FastifyRequest, reply: FastifyReply) {
         const placeData = await handleMultipart(req, "places") as placeDTO;
-        const userId = (req as any).user.id;
-        const place = await this.createUseCase.execute(placeData, userId);
+
+        const place = await this.createUseCase.execute(placeData);
         reply.status(201).send({ message: "Place created successfully", ...place });
     }
 
     async update(req: FastifyRequest, reply: FastifyReply) {
         const { id } = req.params as { id: string };
-        const userId = (req as any).user.id;
+
         const placeData = await handleMultipart(req, "places") as Partial<placeDTO>;
-        const updatedPlace = await this.updateUseCase.execute(id, placeData, userId);
+        const updatedPlace = await this.updateUseCase.execute(id, placeData);
         reply.send({ message: "Place updated successfully", ...updatedPlace });
     }
 
     async delete(req: FastifyRequest, reply: FastifyReply) {
         const { id } = req.params as { id: string };
-        const userId = (req as any).user.id;
-        await this.deleteUseCase.execute(id, userId);
+
+        await this.deleteUseCase.execute(id);
         reply.send({ message: "Place deleted successfully" });
     }
 

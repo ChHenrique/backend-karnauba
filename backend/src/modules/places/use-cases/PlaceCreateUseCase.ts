@@ -1,21 +1,20 @@
 import { randomUUID } from "crypto";
 import { ServerError } from "../../../shared/errors/serverError";
-import { placeDTO } from "../dtos/placeDTO";
-import { PlaceRepository } from "../repositories/PlaceRepository";
-import { placeSchema } from "../schemas/placeSchema";
 import { Place } from "../entities/Place";
 import { Category } from "@prisma/client";
 import { parseImageInput } from "../../../shared/utils/parseImageInput";
 import { normalizePlaceInput } from "../utils/normalizePlaceInput";
+import { placeSchema } from "../schemas/placeSchema";
+import { PlaceRepository } from "../repositories/PlaceRepository";
 import { CityRepository } from "../../cities/repositories/CityRepository";
 
 export class PlaceCreateUseCase {
   constructor(
     private placeRepository: PlaceRepository,
-    private cityRepository: CityRepository // 👉 necessário para verificar o admin da cidade
+    private cityRepository: CityRepository
   ) {}
 
-  async execute(data: any, userId: string): Promise<Place> {
+  async execute(data: any): Promise<Place> {
     const normalizedData = normalizePlaceInput(data);
 
     const parsedData = placeSchema.safeParse(normalizedData);
@@ -46,13 +45,6 @@ export class PlaceCreateUseCase {
 
     if (!city) {
       throw new ServerError("City not found", 404);
-    }
-
-    if (city.adminId !== userId) {
-      throw new ServerError(
-        "You are not authorized to create a place in this city",
-        403
-      );
     }
 
     const id = randomUUID();
