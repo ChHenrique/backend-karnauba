@@ -5,22 +5,19 @@ import type { cityDataDTO } from "../../../dto/City/cityDTO";
 import { SearchedCity } from "../components/SearchCity";
 
 export function SearchSection() {
-  const cities = ["Moraujo...", "Massapê...", "Meruoca..."];
-  const [index, setIndex] = useState<number>(0);
   const [searchCity, setSearchCity] = useState<cityDataDTO[]>([]);
 
   const [filteredCities, setFiltered] = useState<cityDataDTO[]>([]);
   const [searching, setSearching] = useState<boolean>(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % cities.length);
-    }, 10000);
+
 
     GetCities().then((data: cityDataDTO[]) => {
       setSearchCity(data);
+      setFiltered(data);
     });
-  });
+  }, []);
 
   return (
     <div className="w-full h-[60vh] justify-center items-center flex flex-col">
@@ -40,7 +37,7 @@ export function SearchSection() {
           onBlur={() => setTimeout(() => setSearching(false),500)}
           type="text"
           className=" flex w-full md:max-w-[800px] max-md:w-full md:min-w-[600px] h-12 rounded-full border-2 border-neutrals-200/25 px-2 bg-neutrals-100 shadow-xl shadow-neutrals-200/10"
-          placeholder={cities[index]}
+          placeholder="Pesquisar..."
         />
         <div className=" cursor-pointer h-10 absolute right-1 top-1 bg-primary-100 rounded-full flex justify-center items-center aspect-square ">
           <img

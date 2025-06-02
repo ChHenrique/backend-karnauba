@@ -1,6 +1,7 @@
 import { Map } from "./Map";
 import X from "../../../assets/X.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UpdatePlace } from "../services/Places/UpdatePlace";
 
 export function ModalLocalUpdate({
   open,
@@ -39,6 +40,16 @@ export function ModalLocalUpdate({
 
   console.log("Local:", place);
 
+  
+     async function upPlace({local}: any) {
+      if (local.id) {
+        const updatedPlace = await UpdatePlace(local);
+        console.log("Local updated:", updatedPlace);
+      }
+     }
+     
+ 
+
   const [image, setImage] = useState<File | null>(null);
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -55,6 +66,7 @@ export function ModalLocalUpdate({
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+    upPlace(local);
     console.log("Local updated:", local);
     console.log("Image file:", image);
   }
