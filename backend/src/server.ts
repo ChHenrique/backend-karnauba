@@ -14,6 +14,13 @@ import { PlaceRoutes } from "./modules/places/routes/placeRoutes";
 
 
 const fastify = Fastify();
+fastify.register(cors, {
+  origin: 'http://localhost:5173', // Só libera pro seu front
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Somente esses métodos são permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Só permite esses headers
+});
+
 fastify.register(cookie)
 fastify.register(multipart)
 
@@ -23,10 +30,7 @@ fastify.register(fastifyStatic, {
 });
 
 dotenv.config();
-fastify.register(cors, {
-  origin: 'http://localhost:5173',
-  credentials: true, 
-});
+
 
 new UserRoutes(fastify).registerRoutes();
 new CityRoutes(fastify).registerRoutes();
@@ -34,7 +38,8 @@ new EventRoutes(fastify).registerRoutes();
 new PlaceRoutes(fastify).registerRoutes()
 new ImageRoutes(fastify).registerRoutes();
 
-fastify.listen({ port: 3000 })
+fastify.listen({ port: 3000, host: '0.0.0.0' })
+
   .then(() => {
     console.log("Server running: http://localhost:3000");
   })
