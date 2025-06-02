@@ -43,7 +43,7 @@ export function EventsSection({allEvents}: any) {
       <ModalEventCreate open={openEventCreate} setOpen={setOpenEventCreate} />
 
       <div className="w-full h-full p-4 grid place-items-baseline grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 overflow-y-auto overflow-x-hidden">
-        {allEvents.map((event) =>(
+        {allEvents ? allEvents.map((event) =>(
        
         <Card
           event={{
@@ -62,7 +62,7 @@ export function EventsSection({allEvents}: any) {
           setUpdate={setOpenEventUpdate}
           color02={event.color02}
           setEvent={setEvent}
-        />))}
+        />)): null}
       </div>
     </div>
   );
