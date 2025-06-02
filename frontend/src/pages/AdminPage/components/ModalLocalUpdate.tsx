@@ -1,7 +1,6 @@
 import { Map } from "./Map";
-import X from "../../../assets/x.svg";
+import X from "../../../assets/X.svg";
 import { useState } from "react";
-import type { PlaceDTO } from "../../../dto/Place/placeDefinitionDTO";
 
 export function ModalLocalUpdate({
   open,
@@ -24,7 +23,7 @@ export function ModalLocalUpdate({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  const [local, setLocal] = useState<PlaceDTO>({
+  const [local, setLocal] = useState({
     id: place?.id ?? "",
     name: place?.name ?? "",
     description: place?.description ?? "",
@@ -204,8 +203,9 @@ export function ModalLocalUpdate({
               />
 
               <Map
-                position={[place.latitude, place.longitude]}
+                position={[place?.latitude, place?.longitude]}
                 adress={place.adress}
+                
               />
             </div>
           </div>

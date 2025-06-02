@@ -107,7 +107,6 @@ export function Card({
 
       <div>
         <h1 className="text-base font-roboto-100 font-bold">{place?.name}</h1>
-        <h1 className="text-sm font-roboto-100 font-bold">{place?.city}, Ce</h1>
         {place?.adress && (
           <h1 className="text-sm font-roboto-100 font-bold">{place?.adress}</h1>
         )}

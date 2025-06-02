@@ -106,7 +106,6 @@ export function Card({
 
       <div>
         <h1 className="text-base font-roboto-100 font-bold">{event?.name}</h1>
-        <h1 className="text-sm font-roboto-100 font-bold">{event?.city}, Ce</h1>
         {event?.startDate ? (
           <h1 className="text-sm font-roboto-100 font-bold">
             De {event?.startDate} à {event?.endDate}

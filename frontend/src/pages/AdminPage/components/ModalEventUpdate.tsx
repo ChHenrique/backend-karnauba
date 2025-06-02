@@ -1,5 +1,5 @@
 import { Map } from "./Map";
-import X from "../../../assets/x.svg";
+import X from "../../../assets/X.svg";
 import { useState } from "react";
 import type { EventDTO } from "../../../dto/Event/EventDTO";
 
@@ -163,7 +163,7 @@ export function ModalEventUpdate({
               className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
             />
 
-            <Map position={[eventData?.latitude, eventData?.longitude]} adress={eventData.adress} />
+            <Map position={[event?.latitude, event?.longitude]} adress={eventData.adress} />
           </div>
         </div>
 

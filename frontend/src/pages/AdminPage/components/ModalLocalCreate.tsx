@@ -1,7 +1,6 @@
 import { Map } from "./Map";
-import X from "../../../assets/x.svg";
+import X from "../../../assets/X.svg";
 import { useState } from "react";
-import type { PlaceDTO } from "../../../dto/Place/placeDefinitionDTO";
 
 export function ModalLocalCreate({
   open,
@@ -10,7 +9,7 @@ export function ModalLocalCreate({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  const [local, setLocal] = useState<PlaceDTO>({
+  const [local, setLocal] = useState({
     id: "",
     name: "",
     description: "",
