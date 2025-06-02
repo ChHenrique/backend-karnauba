@@ -51,7 +51,7 @@ export function LocalsSection({ allPlaces }: any) {
       ></ModalLocalCreate>
 
       <div className="w-full h-full p-4 grid place items-baseline grid-cols-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2  overflow-y-auto overflow-x-hidden">
-        {allPlaces.map((place) => (
+        {allPlaces ? allPlaces.map((place) => (
         <Card
           place={{
             id: place.id,
@@ -70,7 +70,7 @@ export function LocalsSection({ allPlaces }: any) {
           key={place.id}
           setUpdate={setOpenUpdate}
           setLocals={setLocal}
-        />))}
+        />)): null}
 
       </div>
     </div>

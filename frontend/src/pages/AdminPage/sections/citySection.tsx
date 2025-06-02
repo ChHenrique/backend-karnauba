@@ -2,35 +2,83 @@ import type { cityDataDTO } from "../../../dto/City/cityDTO";
 
 import Logo from "../../../assets/Logo-bright.svg";
 
+import { UpdateCity } from "../services/City/UpdateCity";
+
+
 import { SketchPicker } from "react-color";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { BaseURL } from "../../../lib/axios.config";
 
-export function CitySection({ city }: cityDataDTO) {
+export function CitySection({ city }: any) {
   // const {name, description, imageUrl} = city;
 
-  const [color1, setColor1] = useState<string>(/*city.color1 ||*/ "#FFFFFF");
-  const [color2, setColor2] = useState<string>(/*city.color2 ||*/ "#F1DEFE");
+  const [color1, setColor1] = useState<string>(city?.color01 ?? "#FFFFFF");
+  const [color2, setColor2] = useState<string>(city?.color02 ?? "#F1DEFE");
 
   const [color1On, setColor1On] = useState<boolean>(false);
   const [color2On, setColor2On] = useState<boolean>(false);
 
+  const [cityData, setCityData] = useState({
+    name: city?.name,
+    description: city?.description,
+    imageUrl: BaseURL + city?.imageUrl,
+    color01: city?.color01,
+    color02: city?.color02,
+  });
+
+  console.log(cityData);
+
+  const [image, setImage] = useState<File | null>(city?.imageUrl);
+
+  
+    async function updateCity() {
+      if (cityData.name && cityData.description && cityData.imageUrl) {
+        try {
+          const response = await UpdateCity(
+            city.id,
+            cityData.name,
+            cityData.description,
+            color2,
+            color1
+          );
+          console.log("City updated successfully:", response);
+        } catch (error) {
+          console.error("Error updating city:", error);
+        }
+      }
+    }
+    
+  
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    setImage(file || null);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCityData((prev) => ({ ...prev, imageUrl: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   return (
     <div className="w-full h-full flex max-xl:justify-center justify-evenly items-center rounded-3xl p-8">
-      <form action="" className="">
-        <div className="flex flex-col gap-4 w-full h-full font-roboto-100 font-normal">
+      <form action="" className="" onSubmit={(e) => {updateCity()
+        e.preventDefault();
+      }}>
+        <div className="flex flex-col overflow-y-scroll pr-4 gap-4 w-full h-full font-roboto-100 font-normal">
           Imagem da cidade
           <label
             htmlFor="img"
-            className="h-42 aspect-video bg-primary-200 rounded-3xl"
+            className="h-36 aspect-video bg-primary-200 rounded-3xl"
             style={{
-              backgroundImage:
-                "url('https://cupix.com.br/assets/img/cupix-logo.png')",
+              backgroundImage: `url(${cityData?.imageUrl})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <input type="file" id="img" className="invisible" />
+            <input type="file" id="img" className="invisible" onChange={(e) => handleFileChange(e)} />
           </label>
           <label htmlFor="name" className="font-roboto-100 font-normal w-full">
             Nome da cidade
@@ -38,6 +86,8 @@ export function CitySection({ city }: cityDataDTO) {
           <input
             type="text"
             id="name"
+            value={city?.name || ""}
+            readOnly
             className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
           />
           <label
@@ -50,6 +100,9 @@ export function CitySection({ city }: cityDataDTO) {
             </p>
           </label>
           <textarea
+          placeholder={city?.description}
+          required
+          onChange={(e) => setCityData((prev) => ({ ...prev, description: e.target.value }))}
             id="description"
             className="w-full border-2 rounded-2xl mt-1 border-neutrals-200/30 outline-0 px-2 p-1 font-normal h-18 resize-none"
           ></textarea>
@@ -99,6 +152,14 @@ export function CitySection({ city }: cityDataDTO) {
                 <p>Cor Secundaria</p>
               </div>
             </div>
+            <button
+
+            type="submit"
+            className="cursor-pointer z-100 flex justify-center items-center w-full h-fit py-2 rounded-full bg-primary-100 text-neutrals-200 font-roboto-100 font-bold"
+          >
+            Salvar
+          </button>
+
           </div>
         </div>
       </form>
@@ -166,15 +227,16 @@ export function CitySection({ city }: cityDataDTO) {
           >
             <div
               className="w-full h-full rounded-lg relative flex justify-start overflow-hidden"
-              style={{ background: `url(#)` }}
+              style={{ background: `url(${cityData?.imageUrl})`, backgroundSize: "cover", backgroundPosition: "center" }}
             >
               <div className="h-full z-10 hover:bg-gray-100/15 absolute duration-200  w-full bg-gradient-to-tr from-neutrals-200/60 to-60% to-none"></div>
-              <div className=" absolute w-1/2 max-xl:w-full h-full flex flex-col p-6 max-md:pb-4 max-md:pl-3 justify-end items-start gap-2">
+              <div className="text-white absolute w-full max-xl:w-full h-full flex flex-col p-6 max-md:pb-4 max-md:pl-3 justify-end items-start gap-2">
                 <h1 className=" z-20 max-md:text-xl text-base font-roboto-700 font-bold">
-                  NOME ANTES DO AXIOS
+                  {city?.name || "Nome da Cidade"}
                 </h1>
                 <h1 className=" z-20 max-md:text-sm font-spline-400 font-medium text-xs">
-                  TESXTO EXEMPLO
+                  {cityData.description ||
+                    "Descrição da cidade"}
                 </h1>
               </div>{" "}
             </div>

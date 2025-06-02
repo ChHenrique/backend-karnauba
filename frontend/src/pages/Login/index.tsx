@@ -1,7 +1,41 @@
+import { useState } from "react";
+import axios from "axios";
 import Logo from "../../assets/Logo-bright.svg";
-import { api } from "../../lib/axios.config";
 
 export function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+
+      const response = await axios.post("http://localhost:3000/users/login", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+
+      console.log("Login success:", response.data);
+      // aqui pode redirecionar ou salvar token etc
+
+    } catch (err: any) {
+      console.error("Login error:", err);
+      setError(err.response?.data?.message || "Erro ao tentar logar.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center relative justify-center font-roboto-100 min-h-screen w-sc bg-primary-100 to-neutrals-200">
       <div
@@ -22,11 +56,7 @@ export function LoginPage() {
           </h1>
         </div>
         <form
-          action="POST"
-          onSubmit={(e) => {
-            e.preventDefault();
-
-          }}
+          onSubmit={handleSubmit}
           className="rounded-3xl flex flex-col justify-start items-center h-2/3 min-h-[300px] w-full z-20 mt-10 bg-white"
         >
           <label htmlFor="Email" className="font-roboto-100 font-bold w-full">
@@ -34,27 +64,37 @@ export function LoginPage() {
             <input
               type="text"
               id="Email"
-              className="w-full border-2 rounded-2xl mt-2 border-neutrals-200/30 outline-0 px-2 p-1 font-normal
-              "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border-2 rounded-2xl mt-2 border-neutrals-200/30 outline-0 px-2 p-1 font-normal"
+              required
             />
           </label>
           <label
-            htmlFor="Email"
+            htmlFor="Password"
             className="font-roboto-100 w-full font-bold mt-4"
           >
             Senha
             <input
               type="password"
-              id="Email"
-              className="w-full border-2  rounded-2xl mt-2 border-neutrals-200/30 outline-0 px-2 font-normal p-1"
+              id="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border-2 rounded-2xl mt-2 border-neutrals-200/30 outline-0 px-2 font-normal p-1"
+              required
             />
           </label>
 
+          {error && (
+            <div className="text-red-600 mt-4 text-center w-full">{error}</div>
+          )}
+
           <button
             type="submit"
-            className="text-2xl font-bold w-full h-10 bg-primary-100 text-neutrals-200 duration-200 hover:shadow-primary-100/50 cursor-pointer mt-auto rounded-3xl shadow-xl shadow-primary-100/20"
+            disabled={loading}
+            className="text-2xl font-bold w-full h-10 bg-primary-100 text-neutrals-200 duration-200 hover:shadow-primary-100/50 cursor-pointer mt-auto rounded-3xl shadow-xl shadow-primary-100/20 disabled:opacity-50"
           >
-            Entrar
+            {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
       </div>

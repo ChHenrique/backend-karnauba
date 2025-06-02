@@ -1,4 +1,4 @@
-import { api } from "../../../lib/axios.config";
+import { api } from "../../../../lib/axios.config";
 
 export async function UpdatePlace({ place }: any) {
   try {
