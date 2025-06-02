@@ -1,5 +1,5 @@
 import { Map } from "./Map";
-import X from "../../../assets/x.svg";
+import X from "../../../assets/X.svg";
 import { useState } from "react";
 import type { EventDTO } from "../../../dto/Event/EventDTO";
 
